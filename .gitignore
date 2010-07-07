@@ -1,0 +1,20 @@
+# general hidden files/directories
+
+.DS_Store
+.sconsign*
+.svn
+
+# file patterns
+*.dylib
+*.la
+*.lo
+*.o
+*.pyc
+*.pyo
+*.so
+*.tar.gz
+*.tar.bz2
+*~
+*.project
+*.pydevproject
+*.class
