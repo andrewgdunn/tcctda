@@ -1,8 +1,0 @@
-These are the files that seemed helpful from the DA at the moment:
-
-MyDA2.java -- main file with the callback for the Oracle and Connection
-Sensor.java -- a class to store sensor information, a couple of basic methods (std, mean)
-ErrorFinder.java -- a class with static methods to look for errors in a given sensor (I thought it might be helpful to separate it out this way in case at some point we want different threads searching for errors or something like that)
-
-compile -- bash script to compile and pack the java files
-load.sh -- bash script to load a specific scenario 
