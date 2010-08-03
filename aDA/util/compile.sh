@@ -1,15 +1,28 @@
 #!/bin/bash
-echo "\nCompiling files..."
-javac -cp ../da DiagnosticAlgorithm.java ErrorFinder.java Sensor.java
-#javac -cp $DXC_HOME/Src/APIs/java/src MyDA2.java Sensor.java ErrorFinder.java
-echo "\ndone."
+echo "=============================================="
+echo "Compiling files..."
+javac -cp $DXC_HOME/Src/APIs/java/src ../da/*.java
+echo "done."
+echo "=============================================="
 
-echo -e "\nPacking files..."
-jar cvf ../MyDA2.jar *.class
-echo "\ndone."
+echo "\n=============================================="
+echo "Removing old Package Archives..."
+rm ../bin/*.jar
+echo "done."
+echo "=============================================="
 
-echo "\nCleaning up..."
+echo "\n=============================================="
+echo "Packaging new files into Archive..."
+jar cvf ../bin/DiagnosticAlgorithm.jar ../da/*.class
+echo "done."
+echo "=============================================="
+
+echo "\n=============================================="
+echo "Cleaning up..."
 rm ../da/*.class
-echo "\ndone."
+echo "done."
+echo "=============================================="
 
-echo "/n/nJob Complete"
+echo "\n=============================================="
+echo "Job Complete"
+echo "=============================================="

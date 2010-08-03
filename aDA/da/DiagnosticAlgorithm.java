@@ -30,7 +30,7 @@ import java.io.*;
  * ExampleJavaDA demonstrates how a diagnosis algorithm should send and receive
  * scenario data.
  */
-public class MyDA2 {
+public class DiagnosticAlgorithm {
 
     private static boolean run = true;
 	private static long startTime = 0;
