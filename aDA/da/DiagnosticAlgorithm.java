@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
-import java.io.*;
 
 /**
  * ExampleJavaDA demonstrates how a diagnosis algorithm should send and receive
