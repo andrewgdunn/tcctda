@@ -123,7 +123,7 @@ public class MyDA2 {
         Vector<Map<String, Value>> errorSensors = new Vector();
         for(Object s : allSensors.keySet()) {
         	Sensor o = (Sensor)allSensors.get(s);
-        	Map<String, Value> map = ErrorFinder.timeOfError(o);
+        	Map<String, Value> map = ErrorFinder.errorParams(o);
         	if(map.containsKey("faultIndex")) {
         		int sensorFrequency = (int)(1000 / ( (o.timestamps.elementAt(o.timestamps.size()-1)-o.timestamps.elementAt(0)) / o.timestamps.size() ));
         		//map.put("FaultTime", map.get("faultIndex")/(double)sensorFrequency);
@@ -163,50 +163,6 @@ public class MyDA2 {
     public static void printMap(Map<String, Value> map) {
     	for(String s:map.keySet()) {
     		System.out.println("   " + s + ": " + map.get(s));
-    	}
-    }
-    
-  //---------------------------------------------------------------------------------------------
-    
-    public static void printMatlabFile(Sensor s) {
-    	// make a graphable matlab file
-    	try {
-    		FileWriter fstream = new FileWriter("/home/jeremy/Desktop/dxc10v2/Algs/MyDA2/matlab/" + s.id + ".m");
-	        BufferedWriter out = new BufferedWriter(fstream);
-	    	
-	        String means = "means = [";
-	        String stdsU = "stdsU = [";
-	        String stdsL = "stdsL = [";
-	        
-	    	out.write("close all;\ndata = [");
-	    	for(int i=0; i<s.data.size()-1; i++) {
-	    		double d = ((RealValue)s.data.elementAt(i)).get();
-	    		out.write(d + ", ");
-	    		if(i<ErrorFinder.START_CHECK) {
-	    			means += ("NaN, ");
-	    			stdsU += ("NaN, ");
-	    			stdsL += ("NaN, ");
-	    		} else {
-	    			double m = s.meanThrough(0, i);
-	    			means += (m + ", ");
-	    			stdsU += ( (m + ErrorFinder.STD_RANGE*s.stdThrough(0, i)) + ", ");
-	    			stdsL += ( (m - ErrorFinder.STD_RANGE*s.stdThrough(0, i)) + ", ");
-	    		}
-	    	}
-	    	
-	    	double d = ((RealValue)s.data.elementAt(s.data.size()-1)).get();
-			out.write(d + "];\n");
-			double m = s.meanThrough(0, s.data.size()-1);
-			means += (m + "];\n");
-			stdsU += ( (m + ErrorFinder.STD_RANGE*s.stdThrough(0, s.data.size()-1)) + "]; \n");
-			stdsL += ( (m - ErrorFinder.STD_RANGE*s.stdThrough(0, s.data.size()-1)) + "]; \n");
-			out.write(means + "\n" + stdsU + "\n" + stdsL);
-			
-			out.write("error = " + ErrorFinder.timeOfError(s) + ";\n");
-			out.write("plot(data);\nhold on;\nplot(means, 'm');\nplot(stdsU, 'c');\nplot(stdsL, 'c');\nax=axis;\nplot([error error], [ax(3) ax(4)], 'r--');\nlegend('signal', 'mean', 'std interval');\ntext(error - (ax(2)-ax(1))/20, ax(4) - (ax(4)-ax(3))/20, 'time of error');");
-			out.close();
-    	} catch (Exception e){
-    	      System.err.println("Error: " + e.getMessage());
     	}
     }
     

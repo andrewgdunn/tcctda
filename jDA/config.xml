@@ -6,7 +6,7 @@
 <diagnosisAlgorithm>
 
   <!-- The full name of this diagnosis algorithm -->
-  <name>Mange Diagnosis Algorithm</name>
+  <name>Tardec Diagnosis Algorithm v2</name>
   
   <!-- 
       The name of the executable or .jar file to run.
