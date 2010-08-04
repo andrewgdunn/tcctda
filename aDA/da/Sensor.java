@@ -1,7 +1,4 @@
-import org.dxc.api.connection.ConnectorFactory;
-import org.dxc.api.connection.DxcConnector;
 import org.dxc.api.datatypes.*;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class Sensor {
