@@ -6,7 +6,7 @@
 <diagnosisAlgorithm>
 
   <!-- The full name of this diagnosis algorithm -->
-  <name>TARDEC CBM CASSI Team's Diagnostic Algorithm</name>
+  <name>TARDEC CASSI CBM Team Diagnostic Algorithm</name>
   
   <!-- 
       The name of the executable or .jar file to run.
@@ -14,7 +14,7 @@
         platform - the platform this DA is meant to run on (can be Windows, Linux, or Java)
         mainClass - for Java DAs, the main class to execute (must contain main() method)
     -->
-  <application platform="Java" version="0.0.1" mainClass="DiagnosticAlgorithm">DiagnosticAlgorithm.jar</application>
+  <application platform="Java" version="0.0.01" mainClass="DiagnosticAlgorithm">DiagnosticAlgorithm.jar</application>
 
   <!-- List of supported systems, each contained in a nested <system> element. -->
   <!-- name - System name. ScenarioLoader will run the DA with scenarios from each supported system -->
@@ -43,19 +43,18 @@
   <!-- DA Developer/Competitor contact info -->
   <contact>
     <name>Jeremy Mange</name>
-    <email>jeremy.b.mange.ctr@us.amry.mil</email>
+    <email>jeremy.b.mange.ctr@us.army.mil</email>
+    <role>Software Engineer</role>
+  </contact>
+  <contact>
+    <name>Andrew Dunn</name>
+    <email>andrew.g.dunn@us.army.mil</email>
+    <role>Software Engineer</role>
   </contact>
   <contact>
     <name>Michael Duffy</name>
     <email>michael.j.duffy2.ctr@us.army.mil</email>
-  </contact>
-  <contact>
-    <name>Andrew Dunn</name>
-    <email>andrew.g.dunn@us.amry.mil</email>
-  </contact>
-  <contact>
-    <name>Adam Tucker</name>
-    <email>adam.m.tucker@us.army.mil</email>
+    <role>Statistician</role>
   </contact>
   
 </diagnosisAlgorithm>
