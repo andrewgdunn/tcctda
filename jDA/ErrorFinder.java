@@ -13,8 +13,9 @@ public class ErrorFinder {
 	public static int STD_RANGE = 8;			// maximum number of standard deviations off a reading can be before we assume an error
 	public static int IGNORE = 1;				// minimum number of data errors before we assume the sensor is in error
 	public static int INTERMITTENT_OFFSET = 5;	// number of sensor readings after abrupt error before we look for intermittent error
-	public static int DRIFT_SMOOTH = 30;
-	public static int DRIFT_STEP = 5;
+	public static int DRIFT_SMOOTH = 50;
+	public static int DRIFT_BACKTRACK = 26;
+	public static int DRIFT_STD_RANGE = 5;
 		
 	//---------------------------------------------------------------------------------------------
 	
@@ -232,31 +233,21 @@ public class ErrorFinder {
 			smoothedData[i] = sum / (double)smoothCount;
 		}
 			
-		// now check for monotonic
-		double direction=0, lastVal;
-		boolean monotonic = false;
-		int i;
-		for(i=START_CHECK; i<sensor.data.size()-START_CHECK; i++) {
-			if(smoothedData[i] > smoothedData[i+DRIFT_STEP])
-				direction = -1;
-			else
-				direction = 1;
-			lastVal = smoothedData[i];
-			monotonic = true;
-			for(int j=i+DRIFT_STEP; j<sensor.data.size()-DRIFT_STEP; j+=DRIFT_STEP) {
-				if(lastVal + (smoothedData[j]-lastVal)*direction <= lastVal) {
-					monotonic=false;
-					break;
-				}
-				lastVal = smoothedData[j];
-			}
-			if(monotonic)
+		// now check for drift
+		int errorPoint = -1;
+		for(int i=DRIFT_BACKTRACK+DRIFT_BACKTRACK/2; i<sensor.data.size()-START_CHECK; i++) {
+			if( smoothedData[i] > Sensor.meanThrough(smoothedData, 0, i-DRIFT_BACKTRACK) + DRIFT_STD_RANGE*Sensor.stdThrough(smoothedData, 0, i-DRIFT_BACKTRACK) || 
+				smoothedData[i] < Sensor.meanThrough(smoothedData, 0, i-DRIFT_BACKTRACK) - DRIFT_STD_RANGE*Sensor.stdThrough(smoothedData, 0, i-DRIFT_BACKTRACK) ) {
+				errorPoint = i;
 				break;
+			}
 		}
 		
-		if(monotonic) {
+		
+		if(errorPoint != -1) {
 			// we have a drift error!
-			map.put("faultIndex", Value.v(i));
+			map.put("faultIndex", Value.v(errorPoint));
+			map.put("index", Value.v(errorPoint));
 			map.put("faultType", Value.v("Drift"));
 		}
 		return map;

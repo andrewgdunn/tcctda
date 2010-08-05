@@ -39,11 +39,32 @@ public class Sensor {
 	
 	//---------------------------------------------------------------------------------------------
 	
+	public static double meanThrough(double[] data, int start, int numSamples) {
+		double m = 0;
+		for(int i=start; i<numSamples; i++)
+			m += data[i];
+		m /= numSamples;
+		return m;
+	}
+	
+	//---------------------------------------------------------------------------------------------
+	
 	public double stdThrough(int start, int numSamples) {
 		double m = meanThrough(0, numSamples);
 		double std = 0;
 		for(int i=start; i<numSamples; i++)
 			std += Math.pow(Math.abs(((RealValue)data.elementAt(i)).get() - m), 2);
+		std = Math.sqrt(std/((double)numSamples-1));
+		return std;
+	}
+	
+	//---------------------------------------------------------------------------------------------
+	
+	public static double stdThrough(double[] data, int start, int numSamples) {
+		double m = meanThrough(data, 0, numSamples);
+		double std = 0;
+		for(int i=start; i<numSamples; i++)
+			std += Math.pow(Math.abs(data[i] - m), 2);
 		std = Math.sqrt(std/((double)numSamples-1));
 		return std;
 	}
