@@ -1,4 +1,5 @@
 import org.dxc.api.datatypes.*;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	public static Map<String, Value> errorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// if this is a boolean sensor ... do nothing for now
 		if(!(sensor.data.elementAt(0) instanceof RealValue)) {
@@ -35,8 +36,7 @@ public class ErrorFinder {
 				}
 			}
 			return map;
-		}
-			
+		}			
 		
 		// overriding case: stuck error
 		map = stuckErrorParams(sensor);
@@ -63,7 +63,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> stuckErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int numIdenticalReadings = 0;
 		double lastReading = ((RealValue)sensor.data.elementAt(0)).get();
@@ -91,7 +91,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> abruptErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int errors=0;
 		for(int i=START_CHECK; i<sensor.data.size(); i++) {
@@ -115,7 +115,7 @@ public class ErrorFinder {
 //---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> intermittentErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		Map<String, Value> abrupt = abruptErrorParams(sensor);
 		
@@ -201,7 +201,7 @@ public class ErrorFinder {
 //---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> driftErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// smooth data (to hopefully remove noise)
 		int smoothCount = DRIFT_SMOOTH / 2;

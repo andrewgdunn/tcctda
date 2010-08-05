@@ -20,7 +20,7 @@ echo "done."
 echo "=============================================="
 
 echo "\n=============================================="
-echo "Moving Package Archive &Configuration..."
+echo "Moving Package Archive & Configuration..."
 cp da/*.jar bin/
 cp da/*.xml bin/
 echo "done."
