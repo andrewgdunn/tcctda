@@ -41,60 +41,22 @@ public class DiagnosticAlgorithm {
 	 */
     public static void main(String[] args) {
 		DxcCallback dxcFrameworkCallBack = new DxcCallback() {
-	        public void processData(DxcData daters) {
-	            if(daters instanceof RecoveryData) {
-	            	// Oracle response, determine here what response is best
-					synchronized (this) {
-						// Cast to RecoveryData
-	                    RecoveryData oracleResponse = (RecoveryData) daters;
-						
-	                    String output = "Received from Oracle:\n";
-						for(Command com : oracleResponse.getCommands()) {
-							output += "   " + com.getCommandID() + ": " + com.getValue();
-						}
-						System.out.println(output + "  (cost: " + oracleResponse.getCost() + ")\n");
-						
-						if(oracleResponse.getCost() < recommendedActionCost) {
-							recommendedAction = oracleResponse.getCommands();
-							recommendedActionCost = oracleResponse.getCost();
-						}						
-						notifyAll();
-	                }
+	        public void processData(DxcData dater) {
+	            if(dater instanceof RecoveryData) {
+	            	RecoveryData(this, dater);
 				} 
-	            else if (daters instanceof SensorData) {
-					// Cast to SensorData 
-	                SensorData sensorData = (SensorData) daters;
-	                // get value map for keys
-	                Map<String, Value> sensors = sensorData.getSensorValueMap();
-	                // build iterator
-	                Iterator<String> sensorIterator = sensors.keySet().iterator();
-
-	                while (sensorIterator.hasNext()) {
-
-	                    String sensorID = sensorIterator.next();
-	                    Value value = sensors.get(sensorID);
-						
-						// add sensor to vector, if it doesnt already exist
-						if(!allSensors.containsKey(sensorID))
-							allSensors.put(sensorID, new Sensor(sensorID));
-						
-						// record sensor reading
-						allSensors.get(sensorID).addData(value, daters.getTimeStamp());
-	                }
+	            else if (dater instanceof SensorData) {
+	            	SensorData(this, dater);
 				} 
-	            else if (daters instanceof CommandData) {
-	                // nothing to do here for ADAPT-Lite scenario
+	            else if (dater instanceof CommandData) {
+	            	CommandData(this, dater);
 	            } 
-	            else if (daters instanceof ScenarioStatusData) {
-	            	// all we care about is if it is time to stop
-	                ScenarioStatusData stat = (ScenarioStatusData) daters;
-	                if (stat.getStatus().equals(ScenarioStatusData.ENDED)) {
-	                    isRun = false;
-					}
+	            else if (dater instanceof ScenarioStatusData) {
+	            	ScenarioStatusData(this, dater);
 	            } 
-	            else if (daters instanceof ErrorData) {
+	            else if (dater instanceof ErrorData) {
 	                System.out.print(this.getClass().getName() + " received Error: ");
-	                System.out.print(((ErrorData) daters).getError() + "\n");
+	                System.out.print(((ErrorData) dater).getError() + "\n");
 	            }
 	        }
 	    };
@@ -133,8 +95,8 @@ public class DiagnosticAlgorithm {
         // wait for the Oracle response ...
         try {
         	Thread.sleep(threadSleep);
-        } catch (Exception ex) {
-            System.out.append(ex.toString() + " " + ex.getMessage());
+        } catch (Exception e) {
+            System.out.append(e.toString() + " " + e.getMessage());
         }
         
         // ... and then choose the lowest-cost action we have
@@ -145,7 +107,62 @@ public class DiagnosticAlgorithm {
 		
         System.exit(0);
     }
-
+    
+    private static void RecoveryData(DxcCallback callback, DxcData daters) {
+    	// Oracle response, determine here what response is best
+		synchronized (callback) {
+			// Cast to RecoveryData
+            RecoveryData oracleResponse = (RecoveryData) daters;
+			
+            String output = "Received from Oracle:\n";
+			for(Command com : oracleResponse.getCommands()) {
+				output += "   " + com.getCommandID() + ": " + com.getValue();
+			}
+			System.out.println(output + "  (cost: " + oracleResponse.getCost() + ")\n");
+			
+			if(oracleResponse.getCost() < recommendedActionCost) {
+				recommendedAction = oracleResponse.getCommands();
+				recommendedActionCost = oracleResponse.getCost();
+			}						
+			callback.notifyAll();
+        }
+    }
+    
+	private static void SensorData(DxcCallback callback, DxcData daters) {
+			// Cast to SensorData 
+	        SensorData sensorData = (SensorData) daters;
+	        // get value map for keys
+	        Map<String, Value> sensors = sensorData.getSensorValueMap();
+	        // build iterator
+	        Iterator<String> sensorIterator = sensors.keySet().iterator();
+	
+	        while (sensorIterator.hasNext()) {
+	
+	            String sensorID = sensorIterator.next();
+	            Value value = sensors.get(sensorID);
+				
+				// add sensor to vector, if it doesnt already exist
+				if(!allSensors.containsKey(sensorID))
+					allSensors.put(sensorID, new Sensor(sensorID));
+				
+				// record sensor reading
+				allSensors.get(sensorID).addData(value, daters.getTimeStamp());
+	        }
+	    }
+    
+    private static void CommandData(DxcCallback callback, DxcData daters) {
+    	//Do Nothing, We are only handling the ADAPT-Lite system
+    }
+    
+    private static void ScenarioStatusData(DxcCallback callback, DxcData daters) {
+    	// all we care about is if it is time to stop
+        ScenarioStatusData scenarioStatus = (ScenarioStatusData) daters;
+        if (scenarioStatus.getStatus().equals(ScenarioStatusData.ENDED)) {
+            isRun = false;
+		}
+    }
+    
+    
   //---------------------------------------------------------------------------------------------
     
     public static void printMap(Map<String, Value> map) {
