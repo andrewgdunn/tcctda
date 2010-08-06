@@ -70,4 +70,30 @@ public class Sensor {
 	}
 	
 	//---------------------------------------------------------------------------------------------
+	
+	public double minThrough(int numSamples) {
+		double min = 99999999, val;
+		for(int i=0; i<numSamples; i++) {
+			val = ((RealValue)data.elementAt(i)).get();
+			if(val < min)
+				min = val;
+		}
+			
+		return min;
+	}
+	
+	//---------------------------------------------------------------------------------------------
+	
+	public double maxThrough(int numSamples) {
+		double min = -99999999, val;
+		for(int i=0; i<numSamples; i++) {
+			val = ((RealValue)data.elementAt(i)).get();
+			if(val > min)
+				min = val;
+		}
+			
+		return min;
+	}
+	
+	//---------------------------------------------------------------------------------------------
 }

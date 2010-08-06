@@ -125,8 +125,6 @@ public class MyDA2 {
         	Sensor o = (Sensor)allSensors.get(s);
         	Map<String, Value> map = ErrorFinder.errorParams(o);
         	if(map.containsKey("faultIndex")) {
-        		int sensorFrequency = (int)(1000 / ( (o.timestamps.elementAt(o.timestamps.size()-1)-o.timestamps.elementAt(0)) / o.timestamps.size() ));
-        		//map.put("FaultTime", map.get("faultIndex")/(double)sensorFrequency);
         		map.put("FaultTime", Value.v(o.timestamps.elementAt( ((IntegerValue)(map.get("faultIndex"))).get() ) -
         									 o.timestamps.elementAt(0) ) );
         		map.remove("faultIndex");

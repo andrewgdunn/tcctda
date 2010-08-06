@@ -1,6 +1,7 @@
 import org.dxc.api.connection.ConnectorFactory;
 import org.dxc.api.connection.DxcConnector;
 import org.dxc.api.datatypes.*;
+
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map;
@@ -13,9 +14,9 @@ public class ErrorFinder {
 	public static int STD_RANGE = 8;			// maximum number of standard deviations off a reading can be before we assume an error
 	public static int IGNORE = 1;				// minimum number of data errors before we assume the sensor is in error
 	public static int INTERMITTENT_OFFSET = 5;	// number of sensor readings after abrupt error before we look for intermittent error
-	public static int DRIFT_SMOOTH = 50;
-	public static int DRIFT_BACKTRACK = 26;
-	public static int DRIFT_STD_RANGE = 5;
+	public static int DRIFT_SMOOTH = 20;
+	public static int DRIFT_STEP = 5;
+	public static int DRIFT_WINDOW_SIZE = 20;
 		
 	//---------------------------------------------------------------------------------------------
 	
@@ -173,8 +174,6 @@ public class ErrorFinder {
 				}
 			}
 			
-			System.out.println("switches: " + switches);
-			
 			if(switches%2==1)
 				switches++;
 			switches /= 2;
@@ -208,47 +207,68 @@ public class ErrorFinder {
 	private static Map<String, Value> driftErrorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap();
 		
-		// smooth data (to hopefully remove noise)
-		int smoothCount = DRIFT_SMOOTH / 2;
-		double sum=0, val;
-		double[] smoothedData = new double[sensor.data.size()];
-		// calculate initial sum
-		for(int i=0; i<DRIFT_SMOOTH/2; i++) {
-			val = ((RealValue)sensor.data.elementAt(i)).get();
-			sum += val;
+		// check for drift
+		int errorPoint = -1;
+		int start = sensor.data.size()/10;
+		int end = sensor.data.size()/4;
+		int direction = 0;
+		
+		// calculate min and max vectors
+		double[] maxs = new double[sensor.data.size()];
+		double[] mins = new double[sensor.data.size()];
+		double theMax=-999999, theMin=99999999, val;
+		for(int i=0; i<sensor.data.size(); i++) {
+			theMax=-999999;
+			theMin=9999999;
+			for(int j=0; j<=i; j++) {
+				val = ((RealValue)sensor.data.elementAt(j)).get(); 
+				if(val < theMin)
+					theMin = val; 
+				if(val > theMax)
+					theMax = val;
+			}
+			mins[i]=theMin;
+			maxs[i]=theMax;
 		}
-		smoothedData[0] = sum / (double)smoothCount;
+		double[] important;
+		val = ((RealValue)sensor.data.elementAt(sensor.data.size()-1)).get();
+		important=maxs;
+		if(((RealValue)sensor.data.elementAt(0)).get() > val)
+			important = mins;
+		
+		double lastVal = important[0];
+		int repeats=0;
+		int cutoff = sensor.data.size()/15;
+		
+		// take out
+		/*if(sensor.id.equals("IT281")) {
+			for(int i=0; i<sensor.data.size(); i++)
+				System.out.println(sensor.data.elementAt(i));
+		}*/
 		
 		for(int i=1; i<sensor.data.size(); i++) {
-			if(i+DRIFT_SMOOTH/2-1 < sensor.data.size()) {
-				val = ((RealValue)sensor.data.elementAt(i+DRIFT_SMOOTH/2-1)).get();
-				sum += val;
-				smoothCount++;
+			if(lastVal == important[i]) {
+				repeats++;
+				if(repeats > cutoff)
+					errorPoint = -1;
+			} else {
+				if(repeats > cutoff)
+					errorPoint = i;
+				repeats=0;
 			}
-			if(i-DRIFT_SMOOTH/2 >= 0) {
-				val = ((RealValue)sensor.data.elementAt(i-DRIFT_SMOOTH/2)).get();
-				sum -= val;
-				smoothCount--;
-			}
-			smoothedData[i] = sum / (double)smoothCount;
-		}
-			
-		// now check for drift
-		int errorPoint = -1;
-		for(int i=DRIFT_BACKTRACK+DRIFT_BACKTRACK/2; i<sensor.data.size()-START_CHECK; i++) {
-			if( smoothedData[i] > Sensor.meanThrough(smoothedData, 0, i-DRIFT_BACKTRACK) + DRIFT_STD_RANGE*Sensor.stdThrough(smoothedData, 0, i-DRIFT_BACKTRACK) || 
-				smoothedData[i] < Sensor.meanThrough(smoothedData, 0, i-DRIFT_BACKTRACK) - DRIFT_STD_RANGE*Sensor.stdThrough(smoothedData, 0, i-DRIFT_BACKTRACK) ) {
-				errorPoint = i;
-				break;
-			}
+			lastVal = important[i];
 		}
 		
 		
-		if(errorPoint != -1) {
+		if(errorPoint != -1 && errorPoint < sensor.data.size()*4/5) {
 			// we have a drift error!
 			map.put("faultIndex", Value.v(errorPoint));
 			map.put("index", Value.v(errorPoint));
 			map.put("faultType", Value.v("Drift"));
+			val = ((RealValue)sensor.data.elementAt(sensor.data.size()-1)).get();
+			int sensorFrequency = (int)(1000 / ( (sensor.timestamps.elementAt(sensor.timestamps.size()-1)-sensor.timestamps.elementAt(0)) / sensor.timestamps.size() ));
+			
+			map.put("Slope", Value.v(sensorFrequency * (val-((RealValue)sensor.data.elementAt(0)).get()) / (sensor.data.size()-errorPoint)));
 		}
 		return map;
 	}
