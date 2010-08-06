@@ -9,23 +9,36 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * ExampleJavaDA demonstrates how a diagnosis algorithm should send and receive
- * scenario data.
+ * 
+ * @author Jeremy Mange, Andrew Dunn, Michael Duffy
+ * @see License and contact information in project root
+ * @version 0.0.1
+ * 
+ * Code adaptation from the supplied example during the PHM DXC'10 competition.
+ * Developed for participation in PHM DXC'10 while the authors were employed at 
+ * US Army TARDEC (Tank Automotive Research Development Engineering Command)
+ * 
+ * The code and comments contained in all files do not directly represent the
+ * intentions of the authors organization. 
  */
 public class DiagnosticAlgorithm {
-
-    private static boolean run = true;
-	private static long startTime = 0;
-	
-	private static DxcConnector mainConnector;
-
-	// current lowest-cost action
+	// Keep the loop alive until scenario is complete
+	private static boolean isRun = true;
+	private static int threadSleep = 60;
+	// Connector to communicate with DXC framework
+	private static DxcConnector mainConnector;				
+	// Need to refer to this statically, therefore requires it be declared null here
 	private static CommandSet recommendedAction = null;
+	// Instantiate as a high value, Oracle will certainly return something lower than this.
 	private static double recommendedActionCost = 9999999;
-	
 	// all sensor data
 	private static Map<String, Sensor> allSensors = new HashMap<String, Sensor>();
 	
+	/**
+	 * Main routine will instantiate a callback to the DXC framework, the function 'processData' is required
+	 * and will be called by the framework. It is passed a DxcData object which can be casted into many other
+	 * object types.
+	 */
     public static void main(String[] args) {
 		DxcCallback dxcFrameworkCallBack = new DxcCallback() {
 	        public void processData(DxcData daters) {
@@ -49,22 +62,19 @@ public class DiagnosticAlgorithm {
 	                }
 				} 
 	            else if (daters instanceof SensorData) {
-					if(startTime == 0) {
-						startTime = daters.getTimeStamp();
-					}
 					// Cast to SensorData 
-	                SensorData sd = (SensorData) daters;
+	                SensorData sensorData = (SensorData) daters;
 	                // get value map for keys
-	                Map<String, Value> sensors = sd.getSensorValueMap();
+	                Map<String, Value> sensors = sensorData.getSensorValueMap();
 	                // build iterator
-	                Iterator<String> i = sensors.keySet().iterator();
+	                Iterator<String> sensorIterator = sensors.keySet().iterator();
 
-	                while (i.hasNext()) {
+	                while (sensorIterator.hasNext()) {
 
-	                    String sensorID = i.next();
+	                    String sensorID = sensorIterator.next();
 	                    Value value = sensors.get(sensorID);
 						
-						// add sensor to vector
+						// add sensor to vector, if it doesnt already exist
 						if(!allSensors.containsKey(sensorID))
 							allSensors.put(sensorID, new Sensor(sensorID));
 						
@@ -73,17 +83,17 @@ public class DiagnosticAlgorithm {
 	                }
 				} 
 	            else if (daters instanceof CommandData) {
-	                // nothing to do here for ADAPT-Lite
+	                // nothing to do here for ADAPT-Lite scenario
 	            } 
 	            else if (daters instanceof ScenarioStatusData) {
 	            	// all we care about is if it is time to stop
 	                ScenarioStatusData stat = (ScenarioStatusData) daters;
 	                if (stat.getStatus().equals(ScenarioStatusData.ENDED)) {
-	                    run = false;
+	                    isRun = false;
 					}
 	            } 
 	            else if (daters instanceof ErrorData) {
-	                System.out.print("DiagnosticAlgorithm received Error: ");
+	                System.out.print(this.getClass().getName() + " received Error: ");
 	                System.out.print(((ErrorData) daters).getError() + "\n");
 	            }
 	        }
@@ -92,9 +102,9 @@ public class DiagnosticAlgorithm {
 		try {
         	mainConnector = ConnectorFactory.getDAConnector(dxcFrameworkCallBack);
         	mainConnector.sendMessage(new ScenarioStatusData(ScenarioStatusData.DA_READY));
-            while (run) {
+            while (isRun) {
 				// do something ?
-                Thread.sleep(60);
+                Thread.sleep(threadSleep);
             }
         } catch (Exception ex) {
             System.out.append(ex.toString() + " " + ex.getMessage());
@@ -103,18 +113,14 @@ public class DiagnosticAlgorithm {
         // look for errors; for now just print them out
         Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
         
-        for(Object s : allSensors.keySet()) {
-        	Sensor o = (Sensor)allSensors.get(s);
-        	Map<String, Value> map = ErrorFinder.errorParams(o);
+        for(Object keySet : allSensors.keySet()) {
+        	Sensor individualSensor = (Sensor)allSensors.get(keySet);
+        	Map<String, Value> map = ErrorFinder.errorParams(individualSensor);
         	if(map.containsKey("faultIndex")) {
-        		int sensorFrequency = (int)(1000 / ( (o.timestamps.elementAt(o.timestamps.size()-1)-o.timestamps.elementAt(0)) / o.timestamps.size() ));
-        		//map.put("FaultTime", map.get("faultIndex")/(double)sensorFrequency);
-        		map.put("FaultTime", Value.v(o.timestamps.elementAt( ((IntegerValue)(map.get("faultIndex"))).get() ) -
-        									 o.timestamps.elementAt(0) ) );
+        		map.put("FaultTime", Value.v(individualSensor.timestamps.elementAt( ((IntegerValue)(map.get("faultIndex"))).get() ) - individualSensor.timestamps.elementAt(0) ) );
         		map.remove("faultIndex");
-        		System.out.println(o.id + ":");
-        		
-        		map.put("sensorId", Value.v(o.id));
+        		System.out.println(individualSensor.id + ":");
+        		map.put("sensorId", Value.v(individualSensor.id));
         		errorSensors.add(map);
         	}        		
         	printMap(map);
@@ -126,7 +132,7 @@ public class DiagnosticAlgorithm {
         
         // wait for the Oracle response ...
         try {
-        	Thread.sleep(1000);
+        	Thread.sleep(threadSleep);
         } catch (Exception ex) {
             System.out.append(ex.toString() + " " + ex.getMessage());
         }
