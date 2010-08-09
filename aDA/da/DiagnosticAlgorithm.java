@@ -106,22 +106,31 @@ public class DiagnosticAlgorithm {
         System.exit(0);
     }
     
+    /**
+     * function handles when the oracle responds with recovery information. 
+     * builds up a string to output the commands and values. will compare the
+     * supplied action cost with current recommended cost and select the lesser
+     * @param callback - reference to DxcCallback object
+     * @param daters - Generic object that can be cast, contains all data
+     */
     private static void RecoveryData(DxcCallback callback, DxcData daters) {
     	// Oracle response, determine here what response is best
-		synchronized (callback) {
+    	// Using threading someplace?
+    	synchronized (callback) {
 			// Cast to RecoveryData
             RecoveryData oracleResponse = (RecoveryData) daters;
 			
             String output = "Received from Oracle:\n";
-			for(Command com : oracleResponse.getCommands()) {
-				output += "   " + com.getCommandID() + ": " + com.getValue();
+			for(Command command : oracleResponse.getCommands()) {
+				output += "   " + command.getCommandID() + ": " + command.getValue();
 			}
 			System.out.println(output + "  (cost: " + oracleResponse.getCost() + ")\n");
 			
 			if(oracleResponse.getCost() < recommendedActionCost) {
 				recommendedAction = oracleResponse.getCommands();
 				recommendedActionCost = oracleResponse.getCost();
-			}						
+			}
+			// Using threading someplace?
 			callback.notifyAll();
         }
     }
