@@ -82,7 +82,8 @@ public class DiagnosticAlgorithm {
             while (isRun) {
                 Thread.sleep(threadSleep);
             }
-        } catch (Exception ex) {
+        } 
+		catch (Exception ex) {
             System.out.append(ex.toString() + " " + ex.getMessage());
         }
     }
@@ -92,15 +93,20 @@ public class DiagnosticAlgorithm {
         
         for(Object keySet : allSensors.keySet()) {
         	Sensor individualSensor = (Sensor)allSensors.get(keySet);
-        	Map<String, Value> map = ErrorFinder.errorParams(individualSensor);
-        	if(map.containsKey("faultIndex")) {
-        		map.put("FaultTime", Value.v(individualSensor.timestamps.elementAt( ((IntegerValue)(map.get("faultIndex"))).get() ) - individualSensor.timestamps.elementAt(0) ) );
-        		map.remove("faultIndex");
+        	
+        	/** Send the individual sensor to our filters, if there is a detected error we will
+        	 *  make sure to set the falutIndex. 
+        	 */
+        	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
+        	
+        	if(filterSensor.containsKey("faultIndex")) {
+        		filterSensor.put("FaultTime", Value.v(individualSensor.timestamps.elementAt( ((IntegerValue)(filterSensor.get("faultIndex"))).get() ) - individualSensor.timestamps.elementAt(0) ) );
+        		filterSensor.remove("faultIndex");
         		System.out.println(individualSensor.id + ":");
-        		map.put("sensorId", Value.v(individualSensor.id));
-        		errorSensors.add(map);
+        		filterSensor.put("sensorId", Value.v(individualSensor.id));
+        		errorSensors.add(filterSensor);
         	}        		
-        	printMap(map);
+        	printMap(filterSensor);
         }
         
         // based on which sensors found faults, determine which component is problematic
