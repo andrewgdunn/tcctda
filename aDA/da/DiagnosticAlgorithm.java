@@ -135,6 +135,14 @@ public class DiagnosticAlgorithm {
         }
     }
     
+    /**
+     * function handles scenario where sensor data comes back from callback
+     * iterates over the sensorValueMap and pushes new sensors into the static
+     * allSensors variable. Adds any new sensor values to the particular sensor
+     * in the allSensors variable.
+     * @param callback - reference to DxcCallback object
+     * @param daters - Generic object that can be cast, contains all data
+     */
 	private static void SensorData(DxcCallback callback, DxcData daters) {
 			// Cast to SensorData 
 	        SensorData sensorData = (SensorData) daters;
@@ -143,8 +151,7 @@ public class DiagnosticAlgorithm {
 	        // build iterator
 	        Iterator<String> sensorIterator = sensors.keySet().iterator();
 	
-	        while (sensorIterator.hasNext()) {
-	
+	        while (sensorIterator.hasNext()) {	
 	            String sensorID = sensorIterator.next();
 	            Value value = sensors.get(sensorID);
 				
