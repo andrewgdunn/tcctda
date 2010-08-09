@@ -33,9 +33,28 @@ public class ComponentError {
 		
 		// next, resistance error
 		if(errorSensors.size() <= 3) {
-			
+			Map<String, Value> s240=null;
+			Map<String, Value> s281=null;
+			Map<String, Value> s267=null;
+			for(int i=0; i<errorSensors.size(); i++) { 
+				String id = ((StringValue)errorSensors.elementAt(i).get("sensorId")).get(); 
+				if(id.equals("IT240"))
+					s240=errorSensors.elementAt(i);
+				if(id.equals("IT281"))
+					s281=errorSensors.elementAt(i);
+				if(id.equals("IT267"))
+					s267=errorSensors.elementAt(i);
+			}
+			if(s240!=null && s281!=null) {
+				// this is a DC 485 error
+				componentError.put("sensorId", Value.v("DC485"));
+			}
+			if(s240!=null && s267!=null) {
+				// this is a AC 483 error
+				componentError.put("sensorId", Value.v("AC483"));
+			}
 		}
 		
-		return componentError();
+		return componentError;
 	}
 }
