@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author Jeremy Mange, Andrew Dunn, Michael Duffy
+ * @author Jeremy Mange, Michael Duffy, Andrew Dunn 
  * @see License and contact information in project root
  * @version 0.0.1
  * 
@@ -35,12 +35,27 @@ public class DiagnosticAlgorithm {
 	private static Map<String, Sensor> allSensors = new HashMap<String, Sensor>();
 	
 	/**
-	 * Main routine will instantiate a callback to the DXC framework, the function 'processData' is required
+	 * Main routine will instantiate a call back to the DXC framework, the function 'processData' is required
 	 * and will be called by the framework. It is passed a DxcData object which can be casted into many other
 	 * object types.
+	 * 
+	 * Program flow:
+	 * 
+	 * |---------------------------ConnectAndGetData---------------------------| |---------------------ProcessRecievedData------------------|
+	 * instantiate callback -> connect callback -> scenario runs and finishes -> process collected data -> send framework recommended action 
+	 * 
 	 */
     public static void main(String[] args) {
-		DxcCallback dxcFrameworkCallBack = new DxcCallback() {
+    	ConnectAndGetData();
+    	ProcessRecievedData();		
+        System.exit(0);
+    }
+
+    private static void ConnectAndGetData() {
+		/** Instantiate our connection to the framework, the processData function is the required
+		 *  hook that the framework will execute as a call back...
+		 **/
+    	DxcCallback dxcFrameworkCallBack = new DxcCallback() {
 	        public void processData(DxcData dxcData) {
 	            if(dxcData instanceof RecoveryData) {
 	            	RecoveryData(this, dxcData);
@@ -60,6 +75,7 @@ public class DiagnosticAlgorithm {
 	        }
 	    };
 		
+	    // with the callback function instantiated, lets make a connection and wait for activity
 		try {
         	mainConnector = ConnectorFactory.getDAConnector(dxcFrameworkCallBack);
         	mainConnector.sendMessage(new ScenarioStatusData(ScenarioStatusData.DA_READY));
@@ -69,8 +85,9 @@ public class DiagnosticAlgorithm {
         } catch (Exception ex) {
             System.out.append(ex.toString() + " " + ex.getMessage());
         }
-        
-        // look for errors; for now just print them out
+    }
+    
+    private static void ProcessRecievedData() {
         Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
         
         for(Object keySet : allSensors.keySet()) {
@@ -102,8 +119,6 @@ public class DiagnosticAlgorithm {
         	mainConnector.sendMessage(new CommandData(recommendedAction));
         	System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
         }
-		
-        System.exit(0);
     }
     
     /**
