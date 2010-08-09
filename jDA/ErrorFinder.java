@@ -27,17 +27,19 @@ public class ErrorFinder {
 		if(!(sensor.data.elementAt(0) instanceof RealValue)) {
 			boolean firstVal = ((BoolValue)sensor.data.elementAt(0)).get();
 			boolean allSame = true;
-			for(int i=1; i<sensor.data.size()-1; i++) {
+			int i;
+			for(i=1; i<sensor.data.size()-1; i++) {
 				boolean val = ((BoolValue)sensor.data.elementAt(i)).get();
 				if(val != firstVal) {
 					allSame = false;
 					break;
 				}
 			}
-			if(allSame) {
+			if(!allSame) {
 				boolean val = ((BoolValue)sensor.data.elementAt(sensor.data.size()-1)).get();
 				if(val!=firstVal) {
 					map.put("booleanError", Value.v(val));
+					map.put("faultIndex", Value.v(i));
 				}
 			}
 			return map;
