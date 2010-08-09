@@ -163,7 +163,13 @@ public class DiagnosticAlgorithm {
 				allSensors.get(sensorID).addData(value, daters.getTimeStamp());
 	        }
 	    }
-    
+    /**
+     * currently we are only handling the ADAPT-Lite system, if we were to handle
+     * another scenario that required us to understand commandData from the oracle
+     * we have this stubbed.
+     * @param callback - reference to DxcCallback object
+     * @param daters - Generic object that can be cast, contains all data
+     */
     private static void CommandData(DxcCallback callback, DxcData daters) {
     	//Do Nothing, We are only handling the ADAPT-Lite system
     }
