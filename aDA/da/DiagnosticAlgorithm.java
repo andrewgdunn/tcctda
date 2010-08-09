@@ -41,22 +41,21 @@ public class DiagnosticAlgorithm {
 	 */
     public static void main(String[] args) {
 		DxcCallback dxcFrameworkCallBack = new DxcCallback() {
-	        public void processData(DxcData dater) {
-	            if(dater instanceof RecoveryData) {
-	            	RecoveryData(this, dater);
+	        public void processData(DxcData dxcData) {
+	            if(dxcData instanceof RecoveryData) {
+	            	RecoveryData(this, dxcData);
 				} 
-	            else if (dater instanceof SensorData) {
-	            	SensorData(this, dater);
+	            else if (dxcData instanceof SensorData) {
+	            	SensorData(this, dxcData);
 				} 
-	            else if (dater instanceof CommandData) {
-	            	CommandData(this, dater);
+	            else if (dxcData instanceof CommandData) {
+	            	CommandData(this, dxcData);
 	            } 
-	            else if (dater instanceof ScenarioStatusData) {
-	            	ScenarioStatusData(this, dater);
+	            else if (dxcData instanceof ScenarioStatusData) {
+	            	ScenarioStatusData(this, dxcData);
 	            } 
-	            else if (dater instanceof ErrorData) {
-	                System.out.print(this.getClass().getName() + " received Error: ");
-	                System.out.print(((ErrorData) dater).getError() + "\n");
+	            else if (dxcData instanceof ErrorData) {
+	            	ErrorData(this, dxcData);
 	            }
 	        }
 	    };
@@ -65,7 +64,6 @@ public class DiagnosticAlgorithm {
         	mainConnector = ConnectorFactory.getDAConnector(dxcFrameworkCallBack);
         	mainConnector.sendMessage(new ScenarioStatusData(ScenarioStatusData.DA_READY));
             while (isRun) {
-				// do something ?
                 Thread.sleep(threadSleep);
             }
         } catch (Exception ex) {
@@ -162,14 +160,18 @@ public class DiagnosticAlgorithm {
 		}
     }
     
+    private static void ErrorData(DxcCallback callback, DxcData daters) {
+        System.out.print(callback.getClass().getName() + " received Error: ");
+        System.out.print(((ErrorData) daters).getError() + "\n");
+    }
     
-  //---------------------------------------------------------------------------------------------
     
     public static void printMap(Map<String, Value> map) {
     	for(String s:map.keySet()) {
     		System.out.println("   " + s + ": " + map.get(s));
     	}
     }
+    
     
   //---------------------------------------------------------------------------------------------
     
