@@ -190,6 +190,11 @@ public class DiagnosticAlgorithm {
 		}
     }
     
+    /**
+     * purely prints out errors that the callback supplies
+     * @param callback - reference to DxcCallback object
+     * @param daters - Generic object that can be cast, contains all data
+     */
     private static void ErrorData(DxcCallback callback, DxcData daters) {
         System.out.print(callback.getClass().getName() + " received Error: ");
         System.out.print(((ErrorData) daters).getError() + "\n");
