@@ -163,7 +163,8 @@ public class DiagnosticAlgorithm {
 				allSensors.get(sensorID).addData(value, daters.getTimeStamp());
 	        }
 	    }
-    /**
+    
+	/**
      * currently we are only handling the ADAPT-Lite system, if we were to handle
      * another scenario that required us to understand commandData from the oracle
      * we have this stubbed.
@@ -174,6 +175,13 @@ public class DiagnosticAlgorithm {
     	//Do Nothing, We are only handling the ADAPT-Lite system
     }
     
+    /**
+     * handles changing our looping static variable 'isRun' to false when the
+     * scenario officially ends, good place to put a dump of variables since we
+     * currently don't have much in the way of debugging in real time. 
+     * @param callback - reference to DxcCallback object
+     * @param daters - Generic object that can be cast, contains all data
+     */
     private static void ScenarioStatusData(DxcCallback callback, DxcData daters) {
     	// all we care about is if it is time to stop
         ScenarioStatusData scenarioStatus = (ScenarioStatusData) daters;
