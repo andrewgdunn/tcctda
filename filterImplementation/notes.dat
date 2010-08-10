@@ -121,3 +121,44 @@ for maximum accuracy in localization
 every step
 ******* empty inferred_parameter array [] for no event is permissible
 ******* can remove all aspects/terms related to ACTUAL time; output only index location
+
+
+
+if X jump/M jump/R slope only
+    use inferred state directly, if multiple X then intermittant
+if X jump/M jump
+    post-jump R test
+if X jump/R slope
+    post-jump R (>=, then yes, < false)
+if M jump/R slope
+    auto-slope --> pick based upon if R is high enough/consistent solution
+if X jump/M jump/R slope
+    
+
+
+for all: 
+    data_start = t_guess;
+    Rii_restart = t_guess;
+    fault_parameters(1) = fault_type;
+    fault_parameters(2) = t_guess;
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
