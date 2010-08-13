@@ -93,22 +93,22 @@ public class MyDA2 {
         
         for(Object keySet : allSensors.keySet()) {
         	Sensor individualSensor = (Sensor)allSensors.get(keySet);
-        	
+        	individualSensor.removeOutliers();
         	/** Send the individual sensor to our filters, if there is a detected error we will
         	 *  make sure to set the falutIndex. 
         	 */
         	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
         	
         	if(filterSensor.containsKey("faultIndex")) {
-        		System.out.println(individualSensor.id + ":");
         		filterSensor.put("sensorId", Value.v(individualSensor.id));
         		errorSensors.add(filterSensor);
         	}        		
-        	printMap(filterSensor);
+        	//printMap(filterSensor);
         }
         
         // based on which sensors found faults, determine which component is problematic
         Map<String, Value> finalError = ComponentError.finalError(errorSensors, allSensors);
+        printMap(finalError);
         if(finalError.size() >0)
         	reportError(finalError);
         
@@ -225,6 +225,7 @@ public class MyDA2 {
     	for(String s:map.keySet()) {
     		System.out.println("   " + s + ": " + map.get(s));
     	}
+    	System.out.println();
     }
     
     

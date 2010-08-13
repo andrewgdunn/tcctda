@@ -1,480 +1,442 @@
-2.31176
-2.31958
-2.2883
-2.32349
-2.28048
-2.30003
-2.32349
-2.31176
-2.29612
-2.30785
-2.30003
-2.29612
-2.31176
-2.3274
-2.33913
-2.29612
-2.31567
-2.30003
-2.30785
-2.30785
-2.31567
-2.29612
-2.30785
-2.30003
-2.28048
-2.31567
-2.31176
-2.27266
-2.3274
-2.31176
-2.31176
-2.29612
-2.30785
-2.31958
-2.31958
-2.32349
-2.30003
-2.31567
-2.31958
-2.29221
-2.30785
-2.2883
-2.31176
-2.33522
-2.30785
-2.30003
-2.29221
-2.29221
-2.32349
-2.29221
-2.30003
-2.31567
-2.30785
-2.31176
-2.31567
-2.31958
-2.30003
-2.30003
-2.32349
-2.30785
-2.30785
-2.26875
-2.3274
-2.31176
-2.29221
-2.30003
-2.28048
-2.31567
-2.30003
-2.28048
-2.29221
-2.27657
-2.27657
-2.25702
-2.25311
-2.25702
-2.2883
-2.25702
-2.27266
-2.27657
-2.26093
-2.27657
-2.26093
-2.25702
-2.27266
-2.26875
-2.23747
-2.22965
-2.23747
-2.2492
-2.23747
-2.25702
-2.22965
-2.2492
-2.23356
-2.23356
-2.2492
-2.18273
-2.22574
-2.22574
-2.2101
-2.22183
-2.22574
-2.22965
-2.21792
-2.19446
-2.19837
-2.2101
-2.19837
-2.18664
-2.20619
-2.20619
-2.19055
-2.19055
-2.19446
-2.18273
-2.19446
-2.171
-2.14362
-2.19837
-2.19055
-2.17882
-2.18664
-2.171
-2.15926
-2.18273
-2.171
-2.16709
-2.16318
-2.14753
-2.15535
-2.15926
-2.16318
-2.14753
-2.14362
-2.13971
-2.14362
-2.11625
-2.12798
-2.15926
-2.13971
-2.13971
-2.12798
-2.12407
-2.12016
-2.12407
-2.12798
-2.12798
-2.0967
-2.12798
-2.10843
-2.11625
-2.10061
-2.08106
-2.10061
-2.08888
-2.10452
-2.08888
-2.08106
-2.10452
-2.0967
-2.07715
-2.0967
-2.10843
-2.10061
-2.08888
-2.0967
-2.08106
-2.08106
-2.06542
-2.07715
-2.03805
-2.06151
-2.06542
-2.06151
-2.0576
-2.06933
-2.04196
-2.0576
-2.04196
-2.04978
-2.04196
-2.04196
-2.04978
-2.03023
-2.02632
-2.06542
-2.03805
-2.03805
-2.03414
-2.03805
-2.03805
-2.04196
-2.02632
-2.02632
-2.0185
-2.03023
-1.99895
-2.00677
-2.00677
-2.00677
-2.0185
-2.03414
-2.01459
-2.0185
-2.0185
-2.0185
-2.00677
-2.0185
-2.01459
-1.99895
-2.01459
-1.99895
-1.96767
-1.99504
-1.99895
-1.97549
-1.9794
-1.98722
-1.95203
-1.96767
-1.9794
-1.97549
-1.96376
-1.98722
-1.96767
-1.96376
-1.95985
-1.9794
-1.96376
-1.95203
-1.95985
-1.93639
-1.9403
-1.97549
-1.94812
-1.96767
-1.9403
-1.95203
-1.95203
-1.93639
-1.92857
-1.92857
-1.91293
-1.94421
-1.94421
-1.92857
-1.90902
-1.93639
-1.89729
-1.93639
-1.91684
-1.91293
-1.92466
-1.94421
-1.91293
-1.91684
-1.91293
-1.91293
-1.91684
-1.88947
-1.90902
-1.88947
-1.90511
-1.88947
-1.91684
-1.88556
-1.88556
-1.88947
-1.88947
-1.89729
-1.88165
-1.89729
-1.87383
-1.88556
-1.9012
-1.88947
-1.88556
-1.87774
-1.88165
-1.9012
-1.88556
-1.88165
-1.8621
-1.88165
-1.85819
-1.8621
-1.81908
-1.87383
-1.83472
-1.85037
-1.85037
-1.87383
-1.88556
-1.85037
-1.84254
-1.8269
-1.85819
-1.83863
-1.84645
-1.85037
-1.81908
-1.83863
-1.84645
-1.85037
-1.84254
-1.86992
-1.83472
-1.81908
-1.82299
-1.83863
-1.81126
-1.8269
-1.8269
-1.79953
-1.83472
-1.81517
-1.82299
-1.81908
-1.79953
-1.81126
-1.82299
-1.83472
-1.81517
-1.79953
-1.82299
-1.80735
-1.77998
-1.78389
-1.81126
-1.79562
-1.79953
-1.79953
-1.81517
-1.82299
-1.79562
-1.78389
-1.81126
-1.78389
-1.78389
-1.7878
-1.79562
-1.79953
-1.76043
-1.7878
-1.76043
-1.75261
-1.76043
-1.77216
-1.76825
-1.75261
-1.76043
-1.77216
-1.76043
-1.75652
-1.76043
-1.76825
-1.77216
-1.75652
-1.74479
-1.76043
-1.75652
-1.75652
-1.75261
-1.77216
-1.75261
-1.73697
-1.76043
-1.77216
-1.7487
-1.75652
-1.75652
-1.75261
-1.72524
-1.75261
-1.73697
-1.73306
-1.73697
-1.71351
-1.72915
-1.73306
-1.71742
-1.73697
-1.69787
-1.7096
-1.73306
-1.72915
-1.73697
-1.71742
-1.71351
-1.70569
-1.71351
-1.71351
-1.69787
-1.70569
-1.69396
-1.69396
-1.68614
-1.70569
-1.70569
-1.70569
-1.69005
-1.70569
-1.71351
-1.68614
-1.68614
-1.66659
-1.71351
-1.67832
-1.69005
-1.70569
-1.69005
-1.69787
-1.66268
-1.68614
-1.69396
-1.65877
-1.68223
-1.64313
-1.66268
-1.66659
-1.64704
-1.66659
-1.68614
-1.65877
-1.65486
-1.68614
-1.67832
-1.66268
-1.65877
-1.67832
-1.6705
-1.66268
-1.65877
-1.66268
-1.68223
-1.64313
-1.66268
-1.66268
-1.6705
-1.62358
-1.66268
-1.64313
-1.64704
-1.65877
-1.64704
-1.6314
-1.63922
-1.63922
-1.59987
-1.63922
-1.61576
-1.65877
-1.6705
-1.63922
-1.63922
-1.59987
-1.63922
-1.61576
-1.62358
-1.61576
-1.62358
-1.59205
-1.6314
-1.61576
-1.61576
-1.60769
-1.60378
-1.61967
-1.62749
-1.59205
-1.61576
-1.60378
-1.59987
-1.59987
-1.59596
-1.60378
-1.58814
-1.59596
-1.59987
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1081_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708019287 <DA> detection = true, isolation = true, candidates = { { DC485 = ResistanceOffset [ FaultTime = 60172.0, Offset = -2.28277] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708014553 <SDS> isInjection = true, fault = { DC485 = ResistanceOffset [ FaultTime = 731.0, Offset = -2.5]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4734.0
+Peak Memory: 2766.9375 kb
+Isolation @ time: 4734
+CPU Time: 6120.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_002_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+Detection: True Negative.
+Detection time: NaN
+Peak Memory: 90.46875 kb
+CPU Time: 7620.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_002f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708041695 <DA> detection = true, isolation = true, candidates = { { E240 = Offset [ FaultTime = 110187.0, Offset = -0.984452] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708036139 <SDS> isInjection = true, fault = { E240 = Offset [ FaultTime = 866.0, Offset = -1.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5556.0
+Peak Memory: 6881.109375 kb
+Isolation @ time: 5556
+CPU Time: 6380.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_008f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708053359 <DA> detection = true, isolation = true, candidates = { { E242 = Drift [ FaultTime = 81063.0, Slope = 0.00575628] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708047002 <SDS> isInjection = true, fault = { E242 = Drift [ FaultTime = 667.0, Slope = 0.005]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6357.0
+Peak Memory: 2795.09375 kb
+Isolation @ time: 6357
+CPU Time: 7860.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_011f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708064944 <DA> detection = true, isolation = true, candidates = { { E265 = Stuck [ FaultTime = 150516.0, StuckAt = 0.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708058567 <SDS> isInjection = true, fault = { E265 = Stuck [ FaultTime = 542.0, StuckAt = 0.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6377.0
+Peak Memory: 98.71875 kb
+Isolation @ time: 6377
+CPU Time: 8010.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_014_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+Detection: True Negative.
+Detection time: NaN
+Peak Memory: 2783.640625 kb
+CPU Time: 7880.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_014f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708089344 <DA> detection = true, isolation = true, candidates = { { E281 = IntermittentOffset [ FaultTime = 35625.0, MeanOffset = 0.909786, MeanNominalDuration = 17.6, MeanFaultDuration = 2.85] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708082030 <SDS> isInjection = true, fault = { E281 = IntermittentOffset [ FaultTime = 400.0, MeanOffset = 0.9, MeanNominalDuration = 17.8, MeanFaultDuration = 2.7]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7314.0
+Peak Memory: 6900.1875 kb
+Isolation @ time: 7314
+CPU Time: 7850.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_017f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708099170 <DA> detection = true, isolation = true, candidates = { { IT240 = IntermittentOffset [ FaultTime = 35124.0, MeanOffset = 7.79651, MeanNominalDuration = 6.24091, MeanFaultDuration = 3.07727] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708094377 <SDS> isInjection = true, fault = { IT240 = IntermittentOffset [ FaultTime = 415.0, MeanOffset = 7.8, MeanNominalDuration = 6.2, MeanFaultDuration = 3.1]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4793.0
+Peak Memory: 2792.984375 kb
+Isolation @ time: 4793
+CPU Time: 5970.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_020_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+Detection: True Negative.
+Detection time: NaN
+Peak Memory: 90.46875 kb
+CPU Time: 7620.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_020f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708122905 <DA> detection = true, isolation = true, candidates = { { IT240 = Drift [ FaultTime = 93765.0, Slope = 0.00503549] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708115740 <SDS> isInjection = true, fault = { IT240 = Drift [ FaultTime = 585.0, Slope = 0.005]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7165.0
+Peak Memory: 4202.65625 kb
+Isolation @ time: 7165
+CPU Time: 7710.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_023f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708135137 <DA> detection = true, isolation = true, candidates = { { IT267 = Offset [ FaultTime = 40640.0, Offset = -1.00772] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708127954 <SDS> isInjection = true, fault = { IT267 = Offset [ FaultTime = 427.0, Offset = -1.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7183.0
+Peak Memory: 6864.90625 kb
+Isolation @ time: 7183
+CPU Time: 7710.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_026f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708147501 <DA> detection = true, isolation = true, candidates = { { IT267 = Drift [ FaultTime = 51672.0, Slope = 0.0153724] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708140165 <SDS> isInjection = true, fault = { IT267 = Drift [ FaultTime = 336.0, Slope = 0.015]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7336.0
+Peak Memory: 4202.421875 kb
+Isolation @ time: 7336
+CPU Time: 7730.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_029_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+Detection: True Negative.
+Detection time: NaN
+Peak Memory: 2794.96875 kb
+CPU Time: 7900.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_029f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708171239 <DA> detection = true, isolation = true, candidates = { { IT267 = IntermittentOffset [ FaultTime = 40641.0, MeanOffset = -0.299477, MeanNominalDuration = 14.9545, MeanFaultDuration = 3.18182] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708163921 <SDS> isInjection = true, fault = { IT267 = IntermittentOffset [ FaultTime = 216.0, MeanOffset = -0.3, MeanNominalDuration = 15.0, MeanFaultDuration = 3.1]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7318.0
+Peak Memory: 4191.15625 kb
+Isolation @ time: 7318
+CPU Time: 7660.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_032f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708182802 <DA> detection = true, isolation = true, candidates = { { IT281 = Offset [ FaultTime = 120953.0, Offset = 0.195243] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708176856 <SDS> isInjection = true, fault = { IT281 = Offset [ FaultTime = 962.0, Offset = 0.2]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5946.0
+Peak Memory: 2787.046875 kb
+Isolation @ time: 5946
+CPU Time: 7740.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_035f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708194009 <DA> detection = true, isolation = true, candidates = { { IT281 = IntermittentOffset [ FaultTime = 50672.0, MeanOffset = -0.986402, MeanNominalDuration = 5.21739, MeanFaultDuration = 3.02174] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708187611 <SDS> isInjection = true, fault = { IT281 = IntermittentOffset [ FaultTime = 208.0, MeanOffset = -1.0, MeanNominalDuration = 5.2, MeanFaultDuration = 3.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6398.0
+Peak Memory: 102.703125 kb
+Isolation @ time: 6398
+CPU Time: 7590.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_041_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+Detection: True Negative.
+Detection time: NaN
+Peak Memory: 2801.59375 kb
+CPU Time: 7790.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1127_041f_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708217782 <DA> detection = true, isolation = true, candidates = { { ST516 = Stuck [ FaultTime = 170547.0, StuckAt = 840.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708211361 <SDS> isInjection = true, fault = { ST516 = Stuck [ FaultTime = 1266.0, StuckAt = 840.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6421.0
+Peak Memory: 6904.5 kb
+Isolation @ time: 6421
+CPU Time: 7790.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1139_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708230319 <DA> detection = true, isolation = true, candidates = { { DC485 = ResistanceDrift [ FaultTime = 197235.0, Slope = -0.0219205] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708222914 <SDS> isInjection = true, fault = { DC485 = ResistanceDrift [ FaultTime = 490.0, Slope = -0.005]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 7405.0
+Peak Memory: 6875.0 kb
+Isolation @ time: 7405
+CPU Time: 7840.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1140_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708241861 <DA> detection = true, isolation = true, candidates = { { DC485 = ResistanceDrift [ FaultTime = 30609.0, Slope = 0.0127953] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708235140 <SDS> isInjection = true, fault = { DC485 = ResistanceDrift [ FaultTime = 179.0, Slope = 0.021]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6721.0
+Peak Memory: 98.6875 kb
+Isolation @ time: 6721
+CPU Time: 7800.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1147_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708253304 <DA> detection = true, isolation = true, candidates = { { AC483 = ResistanceDrift [ FaultTime = 41140.0, Slope = -0.136284] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708246789 <SDS> isInjection = true, fault = { AC483 = ResistanceDrift [ FaultTime = 310.0, Slope = -0.1]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6515.0
+Peak Memory: 2778.984375 kb
+Isolation @ time: 6515
+CPU Time: 7890.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1151_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708264879 <DA> detection = true, isolation = true, candidates = { { AC483 = ResistanceDrift [ FaultTime = 188156.0, Slope = 0.246569] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708258269 <SDS> isInjection = true, fault = { AC483 = ResistanceDrift [ FaultTime = 322.0, Slope = 0.071]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 6610.0
+Peak Memory: 2779.5625 kb
+Isolation @ time: 6610
+CPU Time: 7820.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1152_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708274704 <DA> detection = true, isolation = true, candidates = { { AC483 = ResistanceOffset [ FaultTime = 90812.0, Offset = -20.4149] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708270198 <SDS> isInjection = true, fault = { AC483 = ResistanceOffset [ FaultTime = 677.0, Offset = -21.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4506.0
+Peak Memory: 2774.6875 kb
+Isolation @ time: 4506
+CPU Time: 6130.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1156_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708285789 <DA> detection = true, isolation = true, candidates = { { AC483 = ResistanceOffset [ FaultTime = 181000.0, Offset = 14.6415] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708280408 <SDS> isInjection = true, fault = { AC483 = ResistanceOffset [ FaultTime = 1098.0, Offset = 15.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5381.0
+Peak Memory: 4166.234375 kb
+Isolation @ time: 5381
+CPU Time: 6660.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1157_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708295931 <DA> detection = true, isolation = true, candidates = { { DC485 = ResistanceOffset [ FaultTime = 150999.0, Offset = 3.78801] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708291049 <SDS> isInjection = true, fault = { DC485 = ResistanceOffset [ FaultTime = 622.0, Offset = 4.5]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4882.0
+Peak Memory: 95.96875 kb
+Isolation @ time: 4882
+CPU Time: 6340.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1171_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708305771 <DA> detection = true, isolation = true, candidates = { { AC483 = FailedOff [ FaultTime = 50687.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708301028 <SDS> isInjection = true, fault = { AC483 = FailedOff [ FaultTime = 459.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4743.0
+Peak Memory: 2780.046875 kb
+Isolation @ time: 4743
+CPU Time: 6110.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1172_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708316357 <DA> detection = true, isolation = true, candidates = { { DC485 = IntermittentResistanceOffset [ FaultTime = 31110.0, MeanOffset = -2.72906, MeanNominalDuration = 8.38235, MeanFaultDuration = 3.91176] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708310744 <SDS> isInjection = true, fault = { DC485 = IntermittentResistanceOffset [ FaultTime = 376.0, MeanOffset = -3.0, MeanNominalDuration = 7.7, MeanFaultDuration = 3.9]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5613.0
+Peak Memory: 6883.125 kb
+Isolation @ time: 5613
+CPU Time: 5890.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1174_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708323250 <DA> detection = true, isolation = true, candidates = { { CB262 = FailedOpen [ FaultTime = 62234.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708321636 <SDS> isInjection = true, fault = { CB262 = FailedOpen [ FaultTime = 638.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 1614.0
+Peak Memory: 6866.546875 kb
+Isolation @ time: 1614
+CPU Time: 2130.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1175_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708333011 <DA> detection = true, isolation = true, candidates = { { DC485 = FailedOff [ FaultTime = 71734.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708328524 <SDS> isInjection = true, fault = { DC485 = FailedOff [ FaultTime = 628.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4487.0
+Peak Memory: 2787.953125 kb
+Isolation @ time: 4487
+CPU Time: 5970.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1176_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708342691 <DA> detection = true, isolation = true, candidates = { { FAN416 = FailedOff [ FaultTime = 103859.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708338384 <SDS> isInjection = true, fault = { FAN416 = FailedOff [ FaultTime = 737.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4307.0
+Peak Memory: 2773.78125 kb
+Isolation @ time: 4307
+CPU Time: 6010.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1177_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708353217 <DA> detection = true, isolation = true, candidates = { { FAN416 = OverSpeed [ FaultTime = 93813.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708348057 <SDS> isInjection = true, fault = { FAN416 = OverSpeed [ FaultTime = 764.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5160.0
+Peak Memory: 6874.96875 kb
+Isolation @ time: 5160
+CPU Time: 5920.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1178_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708363921 <DA> detection = true, isolation = true, candidates = { { FAN416 = UnderSpeed [ FaultTime = 102344.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708358628 <SDS> isInjection = true, fault = { FAN416 = UnderSpeed [ FaultTime = 789.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5293.0
+Peak Memory: 6887.671875 kb
+Isolation @ time: 5293
+CPU Time: 6060.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1179_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708370729 <DA> detection = true, isolation = true, candidates = { { INV2 = FailedOff [ FaultTime = 111829.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708369034 <SDS> isInjection = true, fault = { INV2 = FailedOff [ FaultTime = 461.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 1695.0
+Peak Memory: 81.8125 kb
+Isolation @ time: 1695
+CPU Time: 2980.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1180_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+faultInjection @1281708376335 <SDS> isInjection = true, fault = { BAT2 = AbruptParasiticLoad [ FaultTime = 960.0]};
+Classification Errors: 1.0
+Detection: False Negative.
+Detection time: NaN
+Peak Memory: 2783.734375 kb
+CPU Time: 7970.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1183_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708392927 <DA> detection = true, isolation = true, candidates = { { AC483 = IntermittentResistanceOffset [ FaultTime = 30609.0, MeanOffset = -19.551, MeanNominalDuration = 19.6667, MeanFaultDuration = 3.55556] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708387517 <SDS> isInjection = true, fault = { AC483 = IntermittentResistanceOffset [ FaultTime = 399.0, MeanOffset = -21.0, MeanNominalDuration = 19.6, MeanFaultDuration = 3.6]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5410.0
+Peak Memory: 6865.46875 kb
+Isolation @ time: 5410
+CPU Time: 5680.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1184_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708403396 <DA> detection = true, isolation = true, candidates = { { AC483 = IntermittentResistanceOffset [ FaultTime = 31063.0, MeanOffset = 139.743, MeanNominalDuration = 5.86364, MeanFaultDuration = 3.63636] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708397899 <SDS> isInjection = true, fault = { AC483 = IntermittentResistanceOffset [ FaultTime = 343.0, MeanOffset = 148.0, MeanNominalDuration = 5.7, MeanFaultDuration = 3.8]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 5497.0
+Peak Memory: 6885.078125 kb
+Isolation @ time: 5497
+CPU Time: 5840.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1185_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708413350 <DA> detection = true, isolation = true, candidates = { { DC485 = IntermittentResistanceOffset [ FaultTime = 31094.0, MeanOffset = -2.73903, MeanNominalDuration = 5.90476, MeanFaultDuration = 4.04762] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708408370 <SDS> isInjection = true, fault = { DC485 = IntermittentResistanceOffset [ FaultTime = 351.0, MeanOffset = -2.8, MeanNominalDuration = 6.1, MeanFaultDuration = 4.1]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4980.0
+Peak Memory: 2785.296875 kb
+Isolation @ time: 4980
+CPU Time: 6020.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1186_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708423286 <DA> detection = true, isolation = true, candidates = { { DC485 = IntermittentResistanceOffset [ FaultTime = 31109.0, MeanOffset = 3.12006, MeanNominalDuration = 13.625, MeanFaultDuration = 3.79167] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708418420 <SDS> isInjection = true, fault = { DC485 = IntermittentResistanceOffset [ FaultTime = 441.0, MeanOffset = 3.2, MeanNominalDuration = 13.5, MeanFaultDuration = 3.9]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 4866.0
+Peak Memory: 2782.84375 kb
+Isolation @ time: 4866
+CPU Time: 6230.0 ms
+
+Scenario: /home/jeremy/Desktop/framework-Aug3/Scenarios/Results/Tardec Diagnosis Algorithm v2 - ADAPT-Lite - Exp_1187_pb_ADAPT-Lite.scn
+Recovery Cost: 0.0
+diagnosis @1281708431547 <DA> detection = true, isolation = true, candidates = { { EY244 = StuckOpen [ FaultTime = 131720.0] } [weight = 1.0] }, notes = 'notes';
+faultInjection @1281708428891 <SDS> isInjection = true, fault = { EY244 = StuckOpen [ FaultTime = 969.0]};
+Classification Errors: 0.0
+Detection: True Positive.
+Detection time: 2656.0
+Peak Memory: 4197.96875 kb
+Isolation @ time: 2656
+CPU Time: 3260.0 ms
+
+DA: Tardec Diagnosis Algorithm v2
+System: ADAPT-Lite
+Mean CPU Time:  6704.6154 ms
+Mean Time To Detect:  5492.0909 ms
+False Positives Rate:  0.0 
+Classification Errors:  1.0 
+Detection Accuracy:  0.9744 
+False Negatives Rate:  0.0294 
+Recovery Cost:  0.0 
+Mean Time To Isolate:  5492.0909 ms
+Mean Peak Memory Usage:  3637.3586 kb
+
+Scores for system ADAPT-Lite: 
+Metric ranking: classificationErrors
+1 - (22.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: detectionAccuracy
+1 - (3.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: falseNegativesRate
+1 - (13.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: falsePositivesRate
+1 - (13.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: meanCPUTime
+1 - (6.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: meanDetectionTime
+1 - (22.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: meanIsolationTime
+1 - (15.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: meanPeakMemory
+1 - (6.0 pts) - Tardec Diagnosis Algorithm v2
+Metric ranking: recoveryCost
+1 - (22.0 pts) - Tardec Diagnosis Algorithm v2
+
+Final Scores: 
+Tardec Diagnosis Algorithm v2 - 122.0
+

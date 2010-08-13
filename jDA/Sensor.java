@@ -8,6 +8,7 @@ public class Sensor {
 	public String id;
 	public Vector<Value> data;
 	public Vector<Long> timestamps;
+	public boolean hitsZero;
 	
 	//---------------------------------------------------------------------------------------------
 	
@@ -15,6 +16,7 @@ public class Sensor {
 		id = sensorID;
 		data = new Vector();
 		timestamps = new Vector();
+		hitsZero = false;
 	}
 	
 	//---------------------------------------------------------------------------------------------
@@ -25,6 +27,9 @@ public class Sensor {
 			value = Value.v(new Double(((IntegerValue)value).get()));
 		data.add(value);
 		timestamps.add(timestamp);
+		
+		if( (value instanceof IntegerValue || value instanceof RealValue) && ((RealValue)value).get()<0.3 )
+			hitsZero = true;
 	}
 	
 	//---------------------------------------------------------------------------------------------
@@ -33,7 +38,7 @@ public class Sensor {
 		double m = 0;
 		for(int i=start; i<numSamples; i++)
 			m += ((RealValue)data.elementAt(i)).get();
-		m /= numSamples;
+		m /= (numSamples-start);
 		return m;
 	}
 	
@@ -43,7 +48,7 @@ public class Sensor {
 		double m = 0;
 		for(int i=start; i<numSamples; i++)
 			m += data[i];
-		m /= numSamples;
+		m /= (numSamples-start);
 		return m;
 	}
 	
@@ -54,7 +59,7 @@ public class Sensor {
 		double std = 0;
 		for(int i=start; i<numSamples; i++)
 			std += Math.pow(Math.abs(((RealValue)data.elementAt(i)).get() - m), 2);
-		std = Math.sqrt(std/((double)numSamples-1));
+		std = Math.sqrt(std/((double)(numSamples-start)-1));
 		return std;
 	}
 	
@@ -65,7 +70,7 @@ public class Sensor {
 		double std = 0;
 		for(int i=start; i<numSamples; i++)
 			std += Math.pow(Math.abs(data[i] - m), 2);
-		std = Math.sqrt(std/((double)numSamples-1));
+		std = Math.sqrt(std/((double)(numSamples-start)-1));
 		return std;
 	}
 	
@@ -93,6 +98,30 @@ public class Sensor {
 		}
 			
 		return min;
+	}
+	
+	//---------------------------------------------------------------------------------------------
+	
+	public void removeOutliers() {
+		// removes the maximum and minimum values from the data (necessary for one scenario)
+		if(data.elementAt(0) instanceof RealValue) {
+			double min = 99999999, max=-99999999;
+			int minI=0, maxI=0;
+			for(int i=0; i<data.size(); i++) {
+				double val = ((RealValue)data.elementAt(i)).get();
+				if(val > max) {
+					max = val;
+					maxI = i;
+				}
+				if(val < min) {
+					min=val;
+					minI=i;
+				}
+			}
+			data.removeElementAt( minI );
+			// index for maxI will have decreased from the removal
+			data.removeElementAt( maxI-1 );
+		}
 	}
 	
 	//---------------------------------------------------------------------------------------------

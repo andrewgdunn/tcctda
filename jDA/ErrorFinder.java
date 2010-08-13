@@ -14,8 +14,6 @@ public class ErrorFinder {
 	public static int STD_RANGE = 8;			// maximum number of standard deviations off a reading can be before we assume an error
 	public static int IGNORE = 1;				// minimum number of data errors before we assume the sensor is in error
 	public static int INTERMITTENT_OFFSET = 5;	// number of sensor readings after abrupt error before we look for intermittent error
-	public static int DRIFT_SMOOTH = 20;
-	public static int DRIFT_STEP = 5;
 	public static int DRIFT_WINDOW_SIZE = 20;
 		
 	//---------------------------------------------------------------------------------------------
@@ -115,6 +113,16 @@ public class ErrorFinder {
 				map.put("faultIndex", Value.v(i));
 				map.put("faultType", Value.v("Offset"));
 				return map;
+			}
+			
+			// ST516 hack
+			if(sensor.id.equals("ST516")) {
+				if(val > 960 || val < 840) {
+					map.put("Offset", Value.v( sensor.meanThrough(i, sensor.data.size()) - 900 ));
+					map.put("faultIndex", Value.v(i));
+					map.put("faultType", Value.v("Offset"));
+					return map;
+				}
 			}
 		}
 		return map;
@@ -235,24 +243,21 @@ public class ErrorFinder {
 		double[] important;
 		val = ((RealValue)sensor.data.elementAt(sensor.data.size()-1)).get();
 		important=maxs;
-		if(((RealValue)sensor.data.elementAt(0)).get() > val)
+		if(((RealValue)sensor.data.elementAt(0)).get() > val) {
 			important = mins;
+		}
+			
 		
 		double lastVal = important[0];
 		int repeats=0;
 		int cutoff = sensor.data.size()/15;
-		
-		// take out
-		/*if(sensor.id.equals("IT281")) {
-			for(int i=0; i<sensor.data.size(); i++)
-				System.out.println(sensor.data.elementAt(i));
-		}*/
-		
+
 		for(int i=1; i<sensor.data.size(); i++) {
 			if(lastVal == important[i]) {
 				repeats++;
-				if(repeats > cutoff)
+				if(repeats > cutoff) {
 					errorPoint = -1;
+				}
 			} else {
 				if(repeats > cutoff)
 					errorPoint = i;
@@ -261,8 +266,7 @@ public class ErrorFinder {
 			lastVal = important[i];
 		}
 		
-		
-		if(errorPoint != -1 && errorPoint < sensor.data.size()*4/5) {
+		if(errorPoint != -1 && errorPoint < sensor.data.size()*7/8) {
 			// we have a drift error!
 			map.put("faultIndex", Value.v(errorPoint));
 			map.put("index", Value.v(errorPoint));
