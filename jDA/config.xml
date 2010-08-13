@@ -14,7 +14,7 @@
         platform - the platform this DA is meant to run on (can be Windows, Linux, or Java)
         mainClass - for Java DAs, the main class to execute (must contain main() method)
     -->
-  <application platform="Java" version="DXC10" mainClass="MyDA2">MyDA2.jar</application>
+  <application platform="Java" version="DXC10" mainClass="DiagnosticAlgorithm">DiagnosticAlgorithm.jar</application>
 
   <!-- List of supported systems, each contained in a nested <system> element. -->
   <!-- name - System name. ScenarioLoader will run the DA with scenarios from each supported system -->

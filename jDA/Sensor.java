@@ -106,7 +106,7 @@ public class Sensor {
 		// removes the maximum and minimum values from the data (necessary for one scenario)
 		if(data.elementAt(0) instanceof RealValue) {
 			double min = 99999999, max=-99999999;
-			int minI=0, maxI=0;
+			int minI=-1, maxI=-1;
 			for(int i=0; i<data.size(); i++) {
 				double val = ((RealValue)data.elementAt(i)).get();
 				if(val > max) {
@@ -118,9 +118,11 @@ public class Sensor {
 					minI=i;
 				}
 			}
-			data.removeElementAt( minI );
+			if(minI > -1)
+				data.removeElementAt( minI );
 			// index for maxI will have decreased from the removal
-			data.removeElementAt( maxI-1 );
+			if(maxI > 0)
+				data.removeElementAt( maxI-1 );
 		}
 	}
 	
