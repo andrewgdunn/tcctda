@@ -135,7 +135,7 @@ public class ErrorFinder {
 		
 		Map<String, Value> abrupt = abruptErrorParams(sensor);
 		
-		if(abrupt.size()==0)
+		if(abrupt.size()==0 || sensor.id.equals("ST516"))
 			return map;
 		
 		int t = ((IntegerValue)(abrupt.get("faultIndex"))).get() + INTERMITTENT_OFFSET; 

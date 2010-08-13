@@ -109,11 +109,11 @@ public class Sensor {
 			int minI=-1, maxI=-1;
 			for(int i=0; i<data.size(); i++) {
 				double val = ((RealValue)data.elementAt(i)).get();
-				if(val > max) {
+				if(val >= max) {
 					max = val;
 					maxI = i;
 				}
-				if(val < min) {
+				if(val <= min) {
 					min=val;
 					minI=i;
 				}
