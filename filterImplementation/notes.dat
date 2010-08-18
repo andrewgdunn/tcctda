@@ -1,0 +1,164 @@
+notes
+
+DO NOT DO ONLINE STD_Y UPDATING;;; FAR WORSE THAN EVEN A GROSSLY OVERESTIMATED STD_Y, WHICH ACTUALLY
+HAS NEGLIGIBLE EFFECT ON THE ACCURACY
+
+
+APPARENTLY THERE EXIST MOMENTARY 'SPIKES' IN THE DATA, PUT ROUTINES THAT LOOK AT THE PARAMETERS TO 
+'UNDO' DECISIONS IF THEY BECOME SIMILAR ENOUGH AGAIN IN THE FUTURE (ALWAYS COMPARE CURRENT RUNNING 
+AVERAGES TO THE PREVIOUS RESULTS STORED IN RESULTS
+
+
+
+
+signal_parameters
+% For each interval: 
+%  1 = fault type
+%  2 = start index
+%  3 = end index
+%  4 = mu_X lower bound CI
+%  5 = mu_X
+%  6 = mu_X upper bound CI
+%  7 = mu_M lower bound CI
+%  8 = mu_M
+%  9 = mu_M upper bound CI
+
+fault_parameters
+% For each sensor
+%  1 = fault type
+%  2 = fault injection index
+%  3 = del_P lower bound CI
+%  4 = del_P
+%  5 = del_P upper bound CI
+%  6 = m lower bound CI
+%  7 = m
+%  8 = m upper bound CI
+%  9 = mu_n lower bound CI
+% 10 = mu_n
+% 11 = mu_n upper bound CI
+% 12 = mu_f lower bound CI
+% 13 = mu_f
+% 14 = mu_f upper bound CI
+% 15 = mu_ratio lower bound CI
+% 16 = mu_ratio
+% 17 = mu_ratio upper bound CI
+
+
+
+
+
+
+Jump Detection
+    X sigma rule
+        sliding average localization
+
+Jump Confirmation
+    1-3 point slope spike past Y sigma of mean
+
+
+Ramp Detection
+            M sigma rule (steep)
+                sliding average + center gap localization {{{TOO INACCURATE AVOID IF POSSIBLE}}}
+    Periodic R value
+        traceback routine
+***must base R_period on sensor rate
+
+
+Ramp Confirmation
+    R value of significance
+
+    COULD do R_L and R_R check on M, but don't do unless necessary
+
+
+
+Take a filter step
+    rule
+        if triggered
+            initiate wait period
+            lay claim
+        end
+    end
+
+    rule
+        if triggered
+            initiate wait period (if not previously initiated)
+            lay claim
+        end
+    end
+
+    if wait period == finished
+        compare rule triggers if multiple
+        consensus determination of event occurance
+            calculate t_inj
+            perform filter restart and parameter extraction
+                run filter over whole time history appropriately
+    end
+
+*** throw in a rule that if the EXACT same sensor value is detected for enough steps then the sensor
+is assumed to be stuck --> about 10-20 points
+
+*** their t_inj_loc = your t_inj_loc + 1
+
+*** pick R_SMT threshold values such that they won't falsly trigger easily but still keep up with 
+X and M jump detection rather well (especially X --> needs to identify if slope present before wait
+interval ends) -------> that way can minimize the wait period to whatever is needed for intermittant
+
+Rule 1 == X jump
+    Rule 2 == X localization
+Rule 2 == M jump
+    Rule 4 == M localization
+Rule 5 == R_SMT threshold values
+    Rule 6 == R traceback and recalculation
+
+step vs ramp --> correlation from injection point guess up to wait limit, need to fix parameter
+*** if less than the correlation from before the injection, know it is a step (the hump)
+*** rerun the localization with a buffer + interval length long enough to use the whole wait period 
+for maximum accuracy in localization
+
+
+
+*******INPUT = vectors of t_hist,Y_hist that are NOT predimensioned --> count/tt = length(t_hist) at 
+every step
+******* empty inferred_parameter array [] for no event is permissible
+******* can remove all aspects/terms related to ACTUAL time; output only index location
+
+
+
+if X jump/M jump/R slope only
+    use inferred state directly, if multiple X then intermittant
+if X jump/M jump
+    post-jump R test
+if X jump/R slope
+    post-jump R (>=, then yes, < false)
+if M jump/R slope
+    auto-slope --> pick based upon if R is high enough/consistent solution
+if X jump/M jump/R slope
+    
+
+
+for all: 
+    data_start = t_guess;
+    Rii_restart = t_guess;
+    fault_parameters(1) = fault_type;
+    fault_parameters(2) = t_guess;
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
