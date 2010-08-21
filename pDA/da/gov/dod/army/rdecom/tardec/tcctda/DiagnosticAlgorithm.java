@@ -10,8 +10,6 @@ import org.dxc.api.connection.ConnectorFactory;
 import org.dxc.api.connection.DxcConnector;
 import org.dxc.api.datatypes.*;
 
-
-
 /**
  * 
  * @author Jeremy Mange, Michael Duffy, Andrew Dunn 
@@ -55,10 +53,11 @@ public class DiagnosticAlgorithm {
         System.exit(0);
     }
 
+	/** Instantiate our connection to the framework, the processData function is the required
+	 *  hook that the framework will execute as a call back...
+	 **/
     private static void ConnectAndGetData() {
-		/** Instantiate our connection to the framework, the processData function is the required
-		 *  hook that the framework will execute as a call back...
-		 **/
+
     	DxcCallback dxcFrameworkCallBack = new DxcCallback() {
 	        public void processData(DxcData dxcData) {
 	            if(dxcData instanceof RecoveryData) {
@@ -92,19 +91,21 @@ public class DiagnosticAlgorithm {
         }
     }
     
+    /**
+     * 
+     */
     private static void ProcessRecievedData() {
         Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
         
         for(Object keySet : allSensors.keySet()) {
-        	Sensor individualSensor = (Sensor)allSensors.get(keySet);
+        	// Snag the individual sensor
+        	Sensor individualSensor = (Sensor) allSensors.get(keySet);
         	
-        	/** Send the individual sensor to our filters, if there is a detected error we will
-        	 *  make sure to set the falutIndex. 
-        	 */
+        	//Send the individual sensor to our filters, if there is a detected error we will make sure to set the falutIndex. 
         	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
         	
-        	if(filterSensor.containsKey("faultIndex")) {
-        		filterSensor.put("FaultTime", Value.v(individualSensor.timestamps.elementAt( ((IntegerValue)(filterSensor.get("faultIndex"))).get() ) - individualSensor.timestamps.elementAt(0) ) );
+        	if( filterSensor.containsKey("faultIndex") ) {
+        		filterSensor.put("FaultTime", Value.v(individualSensor.timestamps.elementAt(( (IntegerValue) (filterSensor.get("faultIndex") ) ).get() ) - individualSensor.timestamps.elementAt(0) ) );
         		filterSensor.remove("faultIndex");
         		System.out.println(individualSensor.id + ":");
         		filterSensor.put("sensorId", Value.v(individualSensor.id));
@@ -114,8 +115,12 @@ public class DiagnosticAlgorithm {
         }
         
         // based on which sensors found faults, determine which component is problematic
-        if(errorSensors.size()==1)
-        	reportError(errorSensors.elementAt(0));
+        if(errorSensors.size() == 1) {
+        	reportError( errorSensors.elementAt(0) );
+        }
+        else {
+        	// more than one Sensor in errorSensors... what to do?!
+        }
         
         // wait for the Oracle response ...
         try {
