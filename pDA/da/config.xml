@@ -14,7 +14,7 @@
         platform - the platform this DA is meant to run on (can be Windows, Linux, or Java)
         mainClass - for Java DAs, the main class to execute (must contain main() method)
     -->
-  <application platform="Java" version="0.0.01" mainClass="DiagnosticAlgorithm">DiagnosticAlgorithm.jar</application>
+  <application platform="Java" version="0.1.01" mainClass="gov.dod.army.rdecom.tardec.tcctda.DiagnosticAlgorithm">DiagnosticAlgorithm.jar</application>
 
   <!-- List of supported systems, each contained in a nested <system> element. -->
   <!-- name - System name. ScenarioLoader will run the DA with scenarios from each supported system -->
@@ -54,7 +54,7 @@
   <contact>
     <name>Michael Duffy</name>
     <email>michael.j.duffy2.ctr@us.army.mil</email>
-    <role>Statistician</role>
+    <role>Aerospace Engineer</role>
   </contact>
   
 </diagnosisAlgorithm>

@@ -1,6 +1,7 @@
 import org.dxc.api.connection.ConnectorFactory;
 import org.dxc.api.connection.DxcConnector;
 import org.dxc.api.datatypes.*;
+
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -14,8 +15,8 @@ public class Sensor {
 	
 	public Sensor(String sensorID) {
 		id = sensorID;
-		data = new Vector();
-		timestamps = new Vector();
+		data = new Vector<Value>();
+		timestamps = new Vector<Long>();
 		hitsZero = false;
 	}
 	

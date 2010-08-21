@@ -1,18 +1,22 @@
-import org.dxc.api.DxcCallback;
-import org.dxc.api.connection.ConnectorFactory;
-import org.dxc.api.connection.DxcConnector;
-import org.dxc.api.datatypes.*;
+package gov.dod.army.rdecom.tardec.tcctda;
 
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.dxc.api.DxcCallback;
+import org.dxc.api.connection.ConnectorFactory;
+import org.dxc.api.connection.DxcConnector;
+import org.dxc.api.datatypes.*;
+
+
+
 /**
  * 
  * @author Jeremy Mange, Michael Duffy, Andrew Dunn 
  * @see License and contact information in project root
- * @version 0.0.1
+ * @version 0.1.0
  * 
  * Code adaptation from the supplied example during the PHM DXC'10 competition.
  * Developed for participation in PHM DXC'10 while the authors were employed at 
@@ -99,24 +103,19 @@ public class DiagnosticAlgorithm {
         	 */
         	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
         	
-        	// Check to see if, after we use our ErrorFinder there was a faultIndex in the map
         	if(filterSensor.containsKey("faultIndex")) {
         		filterSensor.put("FaultTime", Value.v(individualSensor.timestamps.elementAt( ((IntegerValue)(filterSensor.get("faultIndex"))).get() ) - individualSensor.timestamps.elementAt(0) ) );
         		filterSensor.remove("faultIndex");
         		System.out.println(individualSensor.id + ":");
         		filterSensor.put("sensorId", Value.v(individualSensor.id));
         		errorSensors.add(filterSensor);
-        	}
-        	// Print out the map
-        	for(String s:filterSensor.keySet()) {
-        		System.out.println("   " + s + ": " + filterSensor.get(s));
-        	}
+        	}        		
+        	printMap(filterSensor);
         }
         
         // based on which sensors found faults, determine which component is problematic
-        if(errorSensors.size() == 1) {
-        	reportError(errorSensors.elementAt(0));        	
-        }
+        if(errorSensors.size()==1)
+        	reportError(errorSensors.elementAt(0));
         
         // wait for the Oracle response ...
         try {
@@ -125,7 +124,7 @@ public class DiagnosticAlgorithm {
             System.out.append(e.toString() + " " + e.getMessage());
         }
         
-        // if we have a recommendation, send it through the connector
+        // ... and then choose the lowest-cost action we have
         if(recommendedAction != null) {
         	mainConnector.sendMessage(new CommandData(recommendedAction));
         	System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
@@ -226,29 +225,28 @@ public class DiagnosticAlgorithm {
         System.out.print(((ErrorData) daters).getError() + "\n");
     }
     
-    /**
-     * iterate through a map of key:value pairs and print out the results.
-     * @param map - any key:value map
-     */
+    
     public static void printMap(Map<String, Value> map) {
-    	for(String s : map.keySet()) {
+    	for(String s:map.keySet()) {
     		System.out.println("   " + s + ": " + map.get(s));
     	}
     }
+    
+    
+  //---------------------------------------------------------------------------------------------
     
     private static void reportError(Map<String, Value> errorValues) {
     	CandidateSet candidateSet = new CandidateSet();
 		Candidate candidate = new Candidate();
 		
 		StringValueMap faultValues = new StringValueMap();
-		for(String s : errorValues.keySet()) {
-			if(Character.isUpperCase(s.charAt(0))) {
+		for(String s:errorValues.keySet())
+			if(Character.isUpperCase(s.charAt(0)))
 				faultValues.put(s, errorValues.get(s));
-			}
-		}
-			
 		
-		candidate.getFaultSet().add(new Fault(((StringValue) (errorValues.get("sensorId"))).get() , ((StringValue) (errorValues.get("faultType"))).get(), faultValues));
+		candidate.getFaultSet().add(new Fault( ((StringValue)(errorValues.get("sensorId"))).get() , 
+											   ((StringValue)(errorValues.get("faultType"))).get(), 
+											   faultValues));
 		
 		candidate.setWeight(1);
 		candidateSet.add(candidate);
@@ -257,20 +255,18 @@ public class DiagnosticAlgorithm {
 		mainConnector.sendMessage(new DiagnosisData(true, true, candidateSet, "notes"));
 
 		// query Oracle for cost of both ABORT and NOP, choose lower-cost action
-		CommandSet commandNop = new CommandSet();
-		commandNop.add(new Command("systemAction", Value.v("NOP")));
-		RecoveryData recoveryDataNop = new RecoveryData(candidate.getFaultSet(), commandNop);
+		CommandSet commands = new CommandSet();
+		commands.add(new Command("systemAction", Value.v("NOP")));
+		RecoveryData rd = new RecoveryData(candidate.getFaultSet(), commands);
 		
-		CommandSet commandAbort = new CommandSet();
-		commandAbort.add(new Command("systemAction", Value.v("ABORT")));
-		RecoveryData recoveryDataAbort = new RecoveryData(candidate.getFaultSet(), commandAbort);
+		CommandSet commands2 = new CommandSet();
+		commands2.add(new Command("systemAction", Value.v("ABORT")));
+		RecoveryData rd2 = new RecoveryData(candidate.getFaultSet(), commands2);
 		
-		// send both signals, on the recieving end we will weigh the outcomes
 		try {
-			mainConnector.sendMessage(recoveryDataNop);
-			mainConnector.sendMessage(recoveryDataAbort);
-		} 
-		catch(Exception ex) {
+			mainConnector.sendMessage(rd);
+			mainConnector.sendMessage(rd2);
+		} catch(Exception ex) {
 			System.out.println(ex.toString() + " " + ex.getMessage());
 		}
     }

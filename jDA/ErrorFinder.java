@@ -19,7 +19,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	public static Map<String, Value> errorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// if this is a boolean sensor ... do nothing for now
 		if(!(sensor.data.elementAt(0) instanceof RealValue)) {
@@ -69,7 +69,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> stuckErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int numIdenticalReadings = 0;
 		double lastReading = ((RealValue)sensor.data.elementAt(0)).get();
@@ -97,7 +97,7 @@ public class ErrorFinder {
 	//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> abruptErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int errors=0;
 		for(int i=START_CHECK; i<sensor.data.size(); i++) {
@@ -131,7 +131,7 @@ public class ErrorFinder {
 //---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> intermittentErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		Map<String, Value> abrupt = abruptErrorParams(sensor);
 		
@@ -215,14 +215,10 @@ public class ErrorFinder {
 //---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> driftErrorParams(Sensor sensor) {
-		Map<String, Value> map = new HashMap();
+		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// check for drift
 		int errorPoint = -1;
-		int start = sensor.data.size()/10;
-		int end = sensor.data.size()/4;
-		int direction = 0;
-		
 		// calculate min and max vectors
 		double[] maxs = new double[sensor.data.size()];
 		double[] mins = new double[sensor.data.size()];

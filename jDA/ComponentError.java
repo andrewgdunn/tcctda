@@ -1,7 +1,5 @@
-import org.dxc.api.connection.ConnectorFactory;
-import org.dxc.api.connection.DxcConnector;
 import org.dxc.api.datatypes.*;
-import java.util.Iterator;
+
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
@@ -9,7 +7,7 @@ import java.util.HashMap;
 public class ComponentError {
 	public static Map<String, Value> finalError(Vector<Map<String, Value>> errorSensors, Map<String, Sensor> allSensors) {
 		// returns the component error to report to the Oracle
-		Map<String, Value> componentError = new HashMap();
+		Map<String, Value> componentError = new HashMap<String, Value>();
 		
 		// if there is only one error, it should be a sensor error, we can just report it back directly
 		if(errorSensors.size()==1) {
