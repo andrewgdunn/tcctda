@@ -1,0 +1,4 @@
+Notes for writing the paper later on
+
+Desires:
+	Unit testing for subclasses, especially for specific instances inside Sensor where a simple arithmatic error could throw off the calculations considerably.
