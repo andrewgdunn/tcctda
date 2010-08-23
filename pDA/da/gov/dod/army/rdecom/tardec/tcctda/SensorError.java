@@ -5,7 +5,7 @@ import org.dxc.api.datatypes.*;
 import java.util.Map;
 import java.util.HashMap;
 
-public class ErrorFinder {
+public class SensorError {
 	
 	public static int START_CHECK = 40;			// when to start looking for errors (to allow for a buffer for valid initial stats)
 	public static int MAX_IDENTICAL = 80;		// how many identical readings allowed before we assume a stuck error
@@ -19,10 +19,47 @@ public class ErrorFinder {
 	 * @param sensor
 	 * @return
 	 */
-	public static Map<String, Value> errorParams(Sensor sensor) {
+	public static Map<String, Value> findError(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
-		// if this is a boolean sensor ... do nothing for now
+		// Boolean Error
+		map = booleanError(sensor);
+		if(map.size() > 0)
+			return map;			
+		
+		// overriding case: stuck error
+		map = stuckError(sensor);
+		if(map.size() > 0)
+			return map;
+		
+		// next look for intermittent
+		map = intermittentError(sensor);
+		if(map.size() > 0)
+			return map;
+				
+		// then abrupt
+		map = abruptError(sensor);
+		if(map.size() > 0)
+			return map;
+		
+		// finally drift
+		map = driftError(sensor);
+		if(map.size() > 0)
+			return map;
+		
+		// Hopefully it was populated, otherwise coming back with nada
+		return map;
+	}
+	
+	/**
+	 * Looks through the entire data sequence to see if there is an error on a sensor that is realvalue.
+	 * These sensors are boolean style sensors so it compares the initial value to every value following to see if there is a difference.
+	 * @param sensor -- The sensor to check through
+	 * @return map -- the map will have a faultIndex if there is a problem.
+	 */
+	private static Map<String, Value> booleanError(Sensor sensor) {
+		Map<String, Value> map = new HashMap<String, Value>();
+		
 		if(!(sensor.data.elementAt(0) instanceof RealValue)) {
 			boolean firstVal = ((BoolValue)sensor.data.elementAt(0)).get();
 			for(int index = 1; index < sensor.data.size()-1; index++) {
@@ -33,33 +70,11 @@ public class ErrorFinder {
 					break;
 				}
 			}
-			return map;
-		}
-			
-		
-		// overriding case: stuck error
-		map = stuckErrorParams(sensor);
-		if(map.size()>0)
-			return map;
-		
-		// next look for intermittent
-		map = intermittentErrorParams(sensor);
-		if(map.size()>0)
-			return map;
-				
-		// then abrupt
-		map = abruptErrorParams(sensor);
-		if(map.size()>0)
-			return map;
-		
-		// finally drift
-		map = driftErrorParams(sensor);
-		if(map.size()>0)
-			return map;
+		}	
 		return map;
 	}
 		
-	private static Map<String, Value> stuckErrorParams(Sensor sensor) {
+	private static Map<String, Value> stuckError(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int numIdenticalReadings = 0;
@@ -85,7 +100,7 @@ public class ErrorFinder {
 		return map;
 	}
 	
-	private static Map<String, Value> abruptErrorParams(Sensor sensor) {
+	private static Map<String, Value> abruptError(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
 		int errors=0;
@@ -117,10 +132,10 @@ public class ErrorFinder {
 		return map;
 	}
 	
-	private static Map<String, Value> intermittentErrorParams(Sensor sensor) {
+	private static Map<String, Value> intermittentError(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
-		Map<String, Value> abrupt = abruptErrorParams(sensor);
+		Map<String, Value> abrupt = abruptError(sensor);
 		
 		if(abrupt.size()==0 || sensor.id.equals("ST516"))
 			return map;
@@ -199,7 +214,7 @@ public class ErrorFinder {
 		return map;
 	}
 	
-	private static Map<String, Value> driftErrorParams(Sensor sensor) {
+	private static Map<String, Value> driftError(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// check for drift

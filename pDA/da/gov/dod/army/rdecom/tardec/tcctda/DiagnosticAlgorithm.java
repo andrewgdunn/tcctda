@@ -192,7 +192,7 @@ public class DiagnosticAlgorithm {
         	individualSensor.removeOutliers();
         	
         	//Send the individual sensor to our filters, if there is a detected error we will make sure to set the falutIndex. 
-        	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
+        	Map<String, Value> filterSensor = SensorError.findError(individualSensor);
         	
         	if(filterSensor.containsKey("faultIndex")) {
         		filterSensor.put("sensorId", Value.v(individualSensor.id));
