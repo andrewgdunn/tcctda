@@ -89,45 +89,7 @@ public class DiagnosticAlgorithm {
             System.out.append(ex.toString() + " " + ex.getMessage());
         }
     }
-    
-    private static void ProcessRecievedData() {
-        Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
-        
-        for(Object keySet : allSensors.keySet()) {
-        	Sensor individualSensor = (Sensor)allSensors.get(keySet);
-        	individualSensor.removeOutliers();
-        	/** Send the individual sensor to our filters, if there is a detected error we will
-        	 *  make sure to set the falutIndex. 
-        	 */
-        	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
-        	
-        	if(filterSensor.containsKey("faultIndex")) {
-        		filterSensor.put("sensorId", Value.v(individualSensor.id));
-        		errorSensors.add(filterSensor);
-        	}        		
-        	//printMap(filterSensor);
-        }
-        
-        // based on which sensors found faults, determine which component is problematic
-        Map<String, Value> finalError = ComponentError.finalError(errorSensors, allSensors);
-        //printMap(finalError);
-        if(finalError.size() >0)
-        	reportError(finalError);
-        
-        // wait for the Oracle response ...
-        try {
-        	Thread.sleep(threadSleep);
-        } catch (Exception e) {
-            System.out.append(e.toString() + " " + e.getMessage());
-        }
-        
-        // ... and then choose the lowest-cost action we have
-        if(recommendedAction != null) {
-        	mainConnector.sendMessage(new CommandData(recommendedAction));
-        	//System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
-        }
-    }
-    
+
     /**
      * function handles when the oracle responds with recovery information. 
      * builds up a string to output the commands and values. will compare the
@@ -217,12 +179,53 @@ public class DiagnosticAlgorithm {
      * @param callback - reference to DxcCallback object
      * @param daters - Generic object that can be cast, contains all data
      */
-    private static void ErrorData(DxcCallback callback, DxcData daters) {
+    private static void ErrorData(DxcCallback callback, DxcData daters) {    
         System.out.print(callback.getClass().getName() + " received Error: ");
         System.out.print(((ErrorData) daters).getError() + "\n");
     }
     
-    
+    private static void ProcessRecievedData() {
+        Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
+        
+        for(Object keySet : allSensors.keySet()) {
+        	Sensor individualSensor = (Sensor)allSensors.get(keySet);
+        	individualSensor.removeOutliers();
+        	
+        	//Send the individual sensor to our filters, if there is a detected error we will make sure to set the falutIndex. 
+        	Map<String, Value> filterSensor = ErrorFinder.errorParams(individualSensor);
+        	
+        	if(filterSensor.containsKey("faultIndex")) {
+        		filterSensor.put("sensorId", Value.v(individualSensor.id));
+        		errorSensors.add(filterSensor);
+        	}        		
+        	if(printDebug)
+        		printMap(filterSensor);
+        }
+        
+        // based on which sensors found faults, determine which component is problematic
+        Map<String, Value> finalError = ComponentError.finalError(errorSensors, allSensors);
+        //printMap(finalError);
+        if(finalError.size() >0)
+        	reportError(finalError);
+        
+        // wait for the Oracle response ...
+        try {
+        	Thread.sleep(threadSleep);
+        } catch (Exception e) {
+            System.out.append(e.toString() + " " + e.getMessage());
+        }
+        
+        // ... and then choose the lowest-cost action we have
+        if(recommendedAction != null) {
+        	mainConnector.sendMessage(new CommandData(recommendedAction));
+        	//System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
+        }
+    }
+        
+    /**
+     * Just prints out the map of information
+     * @param map -- map to print out
+     */
     public static void printMap(Map<String, Value> map) {
     	for(String s:map.keySet()) {
     		System.out.println("   " + s + ": " + map.get(s));

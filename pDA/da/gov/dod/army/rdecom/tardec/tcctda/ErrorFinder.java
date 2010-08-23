@@ -1,4 +1,5 @@
 package gov.dod.army.rdecom.tardec.tcctda;
+
 import org.dxc.api.datatypes.*;
 
 import java.util.Map;
@@ -12,29 +13,24 @@ public class ErrorFinder {
 	public static int IGNORE = 1;				// minimum number of data errors before we assume the sensor is in error
 	public static int INTERMITTENT_OFFSET = 5;	// number of sensor readings after abrupt error before we look for intermittent error
 	public static int DRIFT_WINDOW_SIZE = 20;
-		
-	//---------------------------------------------------------------------------------------------
 	
+	/**
+	 * Takes in an individual sensor and 
+	 * @param sensor
+	 * @return
+	 */
 	public static Map<String, Value> errorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
 		// if this is a boolean sensor ... do nothing for now
 		if(!(sensor.data.elementAt(0) instanceof RealValue)) {
 			boolean firstVal = ((BoolValue)sensor.data.elementAt(0)).get();
-			boolean allSame = true;
-			int i;
-			for(i=1; i<sensor.data.size()-1; i++) {
-				boolean val = ((BoolValue)sensor.data.elementAt(i)).get();
-				if(val != firstVal) {
-					allSame = false;
+			for(int index = 1; index < sensor.data.size()-1; index++) {
+				boolean indexValue = ( (BoolValue) sensor.data.elementAt(index)).get();
+				if(indexValue != firstVal) {
+					map.put("booleanError", Value.v(indexValue));
+					map.put("faultIndex", Value.v(index));
 					break;
-				}
-			}
-			if(!allSame) {
-				boolean val = ((BoolValue)sensor.data.elementAt(sensor.data.size()-1)).get();
-				if(val!=firstVal) {
-					map.put("booleanError", Value.v(val));
-					map.put("faultIndex", Value.v(i));
 				}
 			}
 			return map;
@@ -62,9 +58,7 @@ public class ErrorFinder {
 			return map;
 		return map;
 	}
-	
-	//---------------------------------------------------------------------------------------------
-	
+		
 	private static Map<String, Value> stuckErrorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
 		
@@ -90,8 +84,6 @@ public class ErrorFinder {
 		}
 		return map;
 	}
-	
-	//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> abruptErrorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
@@ -124,8 +116,6 @@ public class ErrorFinder {
 		}
 		return map;
 	}
-	
-//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> intermittentErrorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
@@ -208,8 +198,6 @@ public class ErrorFinder {
 
 		return map;
 	}
-	
-//---------------------------------------------------------------------------------------------
 	
 	private static Map<String, Value> driftErrorParams(Sensor sensor) {
 		Map<String, Value> map = new HashMap<String, Value>();
