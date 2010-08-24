@@ -9,7 +9,14 @@ import java.util.Vector;
  * @author Jeremy Mange, Michael Duffy, Andrew Dunn 
  * @see License and contact information in project root
  * @version 0.0.1
- *
+ * 
+ * Code adaptation from the supplied example during the PHM DXC'10 competition.
+ * Developed for participation in PHM DXC'10 while the authors were employed at 
+ * US Army TARDEC (Tank Automotive Research Development Engineering Command)
+ * 
+ * The code and comments contained in all files do not directly represent the
+ * intentions of the authors organization. 
+ *  
  * Used for storing sensor information and performing basic mathematics over selected internal data.
  * 
  * @todo Currently the data and timestamps are stored in vectors, realistically they should be in a multidimensional structure to avoid issues with concurrency.
@@ -76,7 +83,7 @@ public class Sensor {
 	 * @param numSamples -- Number of samples to use when calculating the mean
 	 * @return Standard Deviation throughout the Sensor Data from start through the number of required samples
 	 */
-	public double stdThrough(int start, int numSamples) {
+	public double sdThrough(int start, int numSamples) {
 		double mean = meanThrough(0, numSamples);
 		double std = 0;
 		for(int index = start; index < numSamples; index++) {

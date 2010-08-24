@@ -1,10 +1,24 @@
 package gov.dod.army.rdecom.tardec.tcctda;
+
 import org.dxc.api.datatypes.*;
 
 import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Jeremy Mange, Michael Duffy, Andrew Dunn 
+ * @see License and contact information in project root
+ * @version 0.0.1
+ * 
+ * Code adaptation from the supplied example during the PHM DXC'10 competition.
+ * Developed for participation in PHM DXC'10 while the authors were employed at 
+ * US Army TARDEC (Tank Automotive Research Development Engineering Command)
+ * 
+ * The code and comments contained in all files do not directly represent the
+ * intentions of the authors organization. 
+ */
 public class ComponentError {
 	public static Map<String, Value> finalError(Vector<Map<String, Value>> errorSensors, Map<String, Sensor> allSensors) {
 		// returns the component error to report to the Oracle

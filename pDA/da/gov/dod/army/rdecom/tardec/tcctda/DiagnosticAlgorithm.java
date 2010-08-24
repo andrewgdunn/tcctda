@@ -184,42 +184,33 @@ public class DiagnosticAlgorithm {
         System.out.print(((ErrorData) daters).getError() + "\n");
     }
     
+    /**
+     * Individually pass the Sensors to our Sensor and Component Searching algorithms, build out the errors vector and pass the final error to the 
+     */
     private static void ProcessRecievedData() {
-        Vector<Map<String, Value>> errorSensors = new Vector<Map<String, Value>>();
+        Vector<Map<String, Value>> errors = new Vector<Map<String, Value>>();
         
         for(Object keySet : allSensors.keySet()) {
         	Sensor individualSensor = (Sensor)allSensors.get(keySet);
         	individualSensor.removeOutliers();
         	
         	//Send the individual sensor to our filters, if there is a detected error we will make sure to set the falutIndex. 
-        	Map<String, Value> filterSensor = SensorError.findError(individualSensor);
+        	Map<String, Value> sensorError = SensorError.findError(individualSensor);
         	
-        	if(filterSensor.containsKey("faultIndex")) {
-        		filterSensor.put("sensorId", Value.v(individualSensor.id));
-        		errorSensors.add(filterSensor);
+        	if(sensorError.containsKey("faultIndex")) {
+        		sensorError.put("sensorId", Value.v(individualSensor.id));
+            	if(printDebug)
+            		printMap(sensorError);
+        		errors.add(sensorError);
         	}        		
-        	if(printDebug)
-        		printMap(filterSensor);
         }
         
         // based on which sensors found faults, determine which component is problematic
-        Map<String, Value> finalError = ComponentError.finalError(errorSensors, allSensors);
+        Map<String, Value> finalError = ComponentError.finalError(errors, allSensors);
         //printMap(finalError);
         if(finalError.size() >0)
-        	reportError(finalError);
+        	sendErrorToOracle(finalError);
         
-        // wait for the Oracle response ...
-        try {
-        	Thread.sleep(threadSleep);
-        } catch (Exception e) {
-            System.out.append(e.toString() + " " + e.getMessage());
-        }
-        
-        // ... and then choose the lowest-cost action we have
-        if(recommendedAction != null) {
-        	mainConnector.sendMessage(new CommandData(recommendedAction));
-        	//System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
-        }
     }
         
     /**
@@ -227,13 +218,19 @@ public class DiagnosticAlgorithm {
      * @param map -- map to print out
      */
     public static void printMap(Map<String, Value> map) {
-    	for(String s:map.keySet()) {
-    		System.out.println("   " + s + ": " + map.get(s));
+    	if(!map.isEmpty()) {
+        	for(String s : map.keySet()) {
+        		System.out.println("   " + s + ": " + map.get(s));
+        	}
+        	System.out.println();	
     	}
-    	System.out.println();
     }
     
-    private static void reportError(Map<String, Value> errorValues) {
+    /**
+     * 
+     * @param errorValues
+     */
+    private static void sendErrorToOracle(Map<String, Value> errorValues) {
     	CandidateSet candidateSet = new CandidateSet();
 		Candidate candidate = new Candidate();
 		
@@ -242,9 +239,7 @@ public class DiagnosticAlgorithm {
 			if(Character.isUpperCase(s.charAt(0)))
 				faultValues.put(s, errorValues.get(s));
 		
-		candidate.getFaultSet().add(new Fault( ((StringValue)(errorValues.get("sensorId"))).get() , 
-											   ((StringValue)(errorValues.get("faultType"))).get(), 
-											   faultValues));
+		candidate.getFaultSet().add(new Fault( ((StringValue)(errorValues.get("sensorId"))).get() , ((StringValue)(errorValues.get("faultType"))).get(), faultValues));
 		
 		candidate.setWeight(1);
 		candidateSet.add(candidate);
@@ -255,17 +250,30 @@ public class DiagnosticAlgorithm {
 		// query Oracle for cost of both ABORT and NOP, choose lower-cost action
 		CommandSet commands = new CommandSet();
 		commands.add(new Command("systemAction", Value.v("NOP")));
-		RecoveryData rd = new RecoveryData(candidate.getFaultSet(), commands);
+		RecoveryData recoveryDataNOP = new RecoveryData(candidate.getFaultSet(), commands);
 		
 		CommandSet commands2 = new CommandSet();
 		commands2.add(new Command("systemAction", Value.v("ABORT")));
-		RecoveryData rd2 = new RecoveryData(candidate.getFaultSet(), commands2);
+		RecoveryData recoveryDataAbort = new RecoveryData(candidate.getFaultSet(), commands2);
 		
 		try {
-			mainConnector.sendMessage(rd);
-			mainConnector.sendMessage(rd2);
+			mainConnector.sendMessage(recoveryDataNOP);
+			mainConnector.sendMessage(recoveryDataAbort);
 		} catch(Exception ex) {
 			System.out.println(ex.toString() + " " + ex.getMessage());
 		}
+		
+		makeReccomendation();		
     }
+    
+    private static void makeReccomendation() {
+      
+      // ... and then choose the lowest-cost action we have
+      if(recommendedAction != null) {
+      	mainConnector.sendMessage(new CommandData(recommendedAction));
+      	if(printDebug)
+      		System.out.println("DA recommendation: " + ((Command)(recommendedAction.toArray()[0])).getValue() + "\n" );
+      }
+    }
+    
 }
